@@ -1,0 +1,31 @@
+.smallCard{
+ width: 22%;
+ min-width: 160px;
+ // margin: 0 1rem 0 0;
+}
+
+.circle {
+  border-radius: 2.375rem;
+  width: 2em;
+  height: 2em;
+}
+
+.blueCircle{
+  background: var(--dark-version-primary, rgba(96, 92, 255, .3));
+  color: #605cff;
+}
+
+.greenCircle{
+  background: var(--dark-version-primary, rgba(47, 229, 167, .3));
+  color: #2FE5A7;
+}
+
+.redCircle{
+  background: var(--dark-version-primary, rgba(255, 105, 180, .3));
+  color: #FF69B4;
+}
+
+.yellowCircle{
+  background: var(--dark-version-primary, rgba(255, 186, 53, .3));
+  color: #ffba35;
+}
