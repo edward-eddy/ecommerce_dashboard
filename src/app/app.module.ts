@@ -13,6 +13,9 @@ import { ProfileComponent } from './Pages/profile/profile.component';
 import { SubcategoryComponent } from './Pages/subcategory/subcategory.component';
 import { SideNavComponent } from './Component/side-nav/side-nav.component';
 import { MobileSideNavComponent } from './Component/mobile-side-nav/mobile-side-nav.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AreaChartComponent } from './Component/area-chart/area-chart.component';
+import { AreaChart2Component } from './Component/area-chart2/area-chart2.component';
 
 @NgModule({
   declarations: [
@@ -26,11 +29,14 @@ import { MobileSideNavComponent } from './Component/mobile-side-nav/mobile-side-
     ProfileComponent,
     SubcategoryComponent,
     SideNavComponent,
-    MobileSideNavComponent
+    MobileSideNavComponent,
+    AreaChartComponent,
+    AreaChart2Component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()
