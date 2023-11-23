@@ -15,32 +15,34 @@ import { SideNavComponent } from './Component/side-nav/side-nav.component';
 import { MobileSideNavComponent } from './Component/mobile-side-nav/mobile-side-nav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AreaChartComponent } from './Component/area-chart/area-chart.component';
-import { AreaChart2Component } from './Component/area-chart2/area-chart2.component';
+import { BarChartComponent } from "./Component/bar-chart/bar-chart.component";
+import { GroupOfRoutesComponent } from './Component/group-of-routes/group-of-routes.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CategoryComponent,
-    DashboardComponent,
-    LoginComponent,
-    NotFoundComponent,
-    OrdersComponent,
-    ProductComponent,
-    ProfileComponent,
-    SubcategoryComponent,
-    SideNavComponent,
-    MobileSideNavComponent,
-    AreaChartComponent,
-    AreaChart2Component
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
-  providers: [
-    provideClientHydration()
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        CategoryComponent,
+        DashboardComponent,
+        LoginComponent,
+        NotFoundComponent,
+        OrdersComponent,
+        ProductComponent,
+        ProfileComponent,
+        SubcategoryComponent,
+        SideNavComponent,
+        MobileSideNavComponent,
+        AreaChartComponent,
+        GroupOfRoutesComponent,
+    ],
+    providers: [
+        provideClientHydration()
+    ],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BarChartComponent
+    ]
 })
 export class AppModule { }
