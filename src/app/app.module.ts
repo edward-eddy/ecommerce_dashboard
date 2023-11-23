@@ -16,6 +16,7 @@ import { MobileSideNavComponent } from './Component/mobile-side-nav/mobile-side-
 import { HttpClientModule } from '@angular/common/http';
 import { AreaChartComponent } from './Component/area-chart/area-chart.component';
 import { BarChartComponent } from "./Component/bar-chart/bar-chart.component";
+import { GroupOfRoutesComponent } from './Component/group-of-routes/group-of-routes.component';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { BarChartComponent } from "./Component/bar-chart/bar-chart.component";
         SideNavComponent,
         MobileSideNavComponent,
         AreaChartComponent,
+        GroupOfRoutesComponent,
     ],
     providers: [
         provideClientHydration()
