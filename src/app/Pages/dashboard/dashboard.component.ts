@@ -23,46 +23,50 @@ export class DashboardComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     // get all products and show the count with interval
-    this.productService.getAllProducts().subscribe({
+    this.productService.getProductCountPerYear().subscribe({
       next: (data) => {
-        this.productList = data.data;
-        let productCounterInterval: any = setInterval(() => {
-          if (this.productCounter == data.results) {
-            clearInterval(productCounterInterval);
-            return
-          }
-          this.productCounter++;
-        }, 30);
+        this.productCounter = data.productCount
+        // "Bug" => the interval makes the application too slow with only +1000 products
+        // let productCounterInterval: any = setInterval(() => {
+        //   if (this.productCounter == data.productCount) {
+        //     clearInterval(productCounterInterval);
+        //     return
+        //   }
+        //   this.productCounter++;
+        // }, 1);
       },
     });
-    this.productService.getTopTenProducts().subscribe({
+    this.productService.getTopProducts().subscribe({
       next: (data) =>{
         this.topTen = data.data
       }
     })
+
     // get all orders and show the count with interval
-    this.orderService.getAllOrders().subscribe({
-      next: (data) => {
-        this.orderList = data.allOrders;
-        let orderCounterInterval: any = setInterval(() => {
-          if (this.orderCounter == this.orderList.length) {
-            clearInterval(orderCounterInterval);
-            return
-          }
-          this.orderCounter++;
-        }, 30);
-      },
-    });
+    // this.orderService.getAllOrders().subscribe({
+    //   next: (data) => {
+    //     this.orderList = data.allOrders;
+    //     let orderCounterInterval: any = setInterval(() => {
+    //       if (this.orderCounter == this.orderList.length) {
+    //         clearInterval(orderCounterInterval);
+    //         return
+    //       }
+    //       this.orderCounter++;
+    //     }, 30);
+    //   },
+    // });
+
     // get all users and show the count with interval
     this.userService.getAllUsers().subscribe({
       next: (data)=>{
-        let userCounterInterval:any = setInterval(()=>{
-          if(this.userCounter == data.length){
-            clearInterval(userCounterInterval)
-            return
-          }
-          this.userCounter++;
-        },30)
+        this.userCounter = data.length
+        // let userCounterInterval:any = setInterval(()=>{
+        //   if(this.userCounter == data.length){
+        //     clearInterval(userCounterInterval)
+        //     return
+        //   }
+        //   this.userCounter++;
+        // },30)
       }
     })
   }
