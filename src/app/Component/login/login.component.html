@@ -1,0 +1,66 @@
+<form  class="container-fluid m-0 p-0" (ngSubmit)="loginFunc()" [formGroup]="userLoginForm" >
+                <div class="row justify-content-center align-items-center p-0 m-0 w-100  g-2" style="color: #fff;">
+                    <div class="col-12 p-0 ">
+                        <h2 class="h2 text-center">
+                            OPEN MARKET 
+                        </h2>
+                        <h6 class="h6 text-center">
+                            Log in
+                        </h6> 
+                    </div>
+                    <div class="col-6 ">
+                        <label for="" class="form-label">
+                            <img src="../../../../assets/googleLogo.svg" alt="">
+                        </label>
+                        <button class=" loginInput">
+                            Google
+                        </button>
+                    </div>
+                    <div class="col-6 ">
+                        <label for="" class="form-label ">
+                            <img src="../../../../assets/fbLogo.svg" alt="">
+                        </label>
+                        <button class=" loginInput">
+                            Facebook
+                        </button>
+                    </div>
+                    <div class="col-12" style="position: relative;">
+                        <hr>
+                        <span class="orSpan">
+                            Or
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="userEmail" class="form-label ">Email address</label>
+                            <input type="email" class="form-control loginInput" id="userEmail" placeholder="example@mail.com" name="email"   formControlName="email">              
+                        </div>
+                        <div class="mb-3">
+                            <label for="userPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control loginInput" id="userPassword" placeholder="******" name="password" formControlName="password">              
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <input class="form-check-input" type="checkbox" value="" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">
+                            Remember me
+                        </label>
+                    </div>
+                    <div class="col-6 text-end">
+                        <a href="" style="color: #605CFF; text-decoration: none;">
+                            Reset Password?
+                        </a>
+                    </div>
+                    <div class="col-12 my-4">
+                        <input type="submit" value="Log in" class="loginInput" >
+                    </div>
+                   <div class="col-12">
+                        <p class="lead fs-6 d-inline-block">
+                            Don't have an account? 
+                        </p>
+                        <a  routerLink="/user/auth/register" class="authChangeBtn">
+                            Register now
+                        </a>
+                   </div>
+            </div>
+            </form>        
