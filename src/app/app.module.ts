@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AreaChartComponent } from './Component/area-chart/area-chart.component';
 import { BarChartComponent } from "./Component/bar-chart/bar-chart.component";
 import { GroupOfRoutesComponent } from './Component/group-of-routes/group-of-routes.component';
+import { LastAreaChartComponent } from './Component/last-area-chart/last-area-chart.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { GroupOfRoutesComponent } from './Component/group-of-routes/group-of-rou
         MobileSideNavComponent,
         AreaChartComponent,
         GroupOfRoutesComponent,
+        LastAreaChartComponent,
     ],
     providers: [
         provideClientHydration()
