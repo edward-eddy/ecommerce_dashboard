@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUser } from '../../Models/iUser';
-import { UserService } from '../../Service/user.service';
+import { UserRequestsService } from '../../Services/user-requests.service';
+
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,7 @@ export class RegisterComponent {
   // password with regx and errors
   passwordRegx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
 
-  constructor (private formBuilder : FormBuilder ,private router : Router , private userService : UserService){
+  constructor (private formBuilder : FormBuilder ,private router : Router , private userService : UserRequestsService){
     this.userRegisterForm = this.formBuilder.group({
       name : ['' , [Validators.required , Validators.minLength(5) , Validators.pattern(this.nameRegx)]],
       email : ['' , [Validators.required , Validators.email , Validators.pattern(this.emailRegx)]],
@@ -31,7 +32,7 @@ export class RegisterComponent {
 
 
     })
-    if(userService.isUserLogged){
+    if(!userService.isUserLogged){
       router.navigate(['/'])
     }
   }
@@ -55,7 +56,7 @@ export class RegisterComponent {
       },
       error(err) {
         console.log(err);
-        
+
       },
     })
   }

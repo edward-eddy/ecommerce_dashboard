@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IUser } from '../../Models/iUser';
 import { Router } from '@angular/router';
-import { UserService } from '../../Service/user.service';
+import { UserRequestsService } from '../../Services/user-requests.service';
 
 @Component({
   selector: 'app-login',
@@ -12,20 +12,20 @@ import { UserService } from '../../Service/user.service';
 export class LoginComponent {
   userLoginForm : FormGroup;
   user : IUser = {} as IUser
-  constructor (private formBuilder : FormBuilder , private router : Router ,private userService : UserService){
+  constructor (private formBuilder : FormBuilder , private router : Router ,private userService : UserRequestsService){
     this.userLoginForm = this.formBuilder.group({
       email : ['' , [Validators.required , Validators.email]],
       password : ['' , [Validators.required , Validators.minLength(6)]]
-    
+
     })
 
     console.log(userService.isUserLogged);
     if(userService.isUserLogged){
       router.navigate(['/'])
     }
-    
+
   }
-  
+
 
   get email(){
     return this.userLoginForm.get('email')
@@ -37,7 +37,7 @@ export class LoginComponent {
 
 
   moveToRegister(){
-    
+
     this.router.navigate(["/register"])
 
   }
@@ -55,7 +55,7 @@ export class LoginComponent {
       },
       error(err) {
         console.log(err);
-        
+
       },
     })
   }

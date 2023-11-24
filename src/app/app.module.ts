@@ -13,7 +13,7 @@ import { ProfileComponent } from './Component/profile/profile.component';
 import { SubcategoryComponent } from './Pages/subcategory/subcategory.component';
 import { SideNavComponent } from './Component/side-nav/side-nav.component';
 import { MobileSideNavComponent } from './Component/mobile-side-nav/mobile-side-nav.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { AreaChartComponent } from './Component/area-chart/area-chart.component';
 import { BarChartComponent } from "./Component/bar-chart/bar-chart.component";
 import { GroupOfRoutesComponent } from './Component/group-of-routes/group-of-routes.component';
@@ -44,7 +44,8 @@ import { UserProfileComponent } from './Component/user-profile/user-profile.comp
     UserProfileComponent
     ],
     providers: [
-        provideClientHydration()
+        provideClientHydration(),
+        provideHttpClient(withFetch())
     ],
     bootstrap: [AppComponent],
     imports: [
