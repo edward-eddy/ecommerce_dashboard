@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import Chart from 'chart.js/auto';
+import { ProductRequestsService } from '../../Services/product-requests.service';
 
 @Component({
   selector: 'app-bar-chart',
@@ -10,9 +11,46 @@ import Chart from 'chart.js/auto';
   styleUrl: './bar-chart.component.scss',
 })
 export class BarChartComponent implements OnInit {
-  constructor() {}
+  months: string[] = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  result: any;
+  data: number[] = [];
+  currentMonth = new Date().getMonth();
+  constructor(private productService: ProductRequestsService) {
+    // Create a sorted array of months
+    this.months = [
+      ...this.months.slice(this.currentMonth),
+      ...this.months.slice(0, this.currentMonth),
+    ];
+  }
 
   ngOnInit(): void {
+
+
+
+    this.result = this.productService.getProductCountPerYear().subscribe({
+      next: (data) => {
+        data.result.sort((a, b) => {
+          const indexA = (a.month - this.currentMonth + 11) % 12;
+          const indexB = (b.month - this.currentMonth + 11) % 12;
+          return indexA - indexB;
+        });
+        this.result = data.result;
+        this.data = this.result.map((data: any) => data.count)
+      },
+    });
     this.createChart();
   }
 
@@ -22,47 +60,34 @@ export class BarChartComponent implements OnInit {
     this.chart = new Chart('barChart', {
       type: 'bar',
       data: {
-        labels: [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
-          'Oct',
-          'Nov',
-          'Dec',
-        ],
+        labels: this.months,
         datasets: [
           {
             label: 'Product Added By Month',
-            data: [13, 16, 21, 28, 32, 34, 32, 31, 30, 26, 20, 14],
+            data: this.data,
             backgroundColor: 'rgba(255, 105, 180, 1)',
             borderWidth: 0,
-            // categoryPercentage: 1.0,
             barPercentage: 0.5,
-            borderRadius:10
+            borderRadius: 10,
           },
         ],
       },
       options: {
-        aspectRatio: .8,
+        aspectRatio: 0.8,
         indexAxis: 'y',
         scales: {
           x: {
             ticks: {
-              color: "#ccc"
-            }
+              color: '#ccc',
+            },
           },
           y: {
             ticks: {
-              color: "#ccc"
-            }
-          }
-      }},
+              color: '#ccc',
+            },
+          },
+        },
+      },
     });
   }
 }
