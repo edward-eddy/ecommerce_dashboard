@@ -20,9 +20,9 @@ export class LoginComponent {
     })
 
     console.log(userService.isUserLogged);
-    if(userService.isUserLogged){
-      router.navigate(['/'])
-    }
+    // if(userService.isUserLogged){
+    //   router.navigate(['/'])
+    // }
 
   }
 
