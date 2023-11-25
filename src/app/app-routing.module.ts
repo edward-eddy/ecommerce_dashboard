@@ -12,21 +12,19 @@ import { UserContainerComponent } from './Pages/user-container/user-container.co
 import { AuthContainerComponent } from './Pages/auth-container/auth-container.component';
 import { UserProfileComponent } from './Component/user-profile/user-profile.component';
 import { GroupOfRoutesComponent } from './Component/group-of-routes/group-of-routes.component';
-import { adminAuthGuard } from './Guards/admin-auth.guard';
-import { adminLoginGuard } from './Guards/admin-login.guard';
 
 
 const routes: Routes = [
-  {path:"", component: GroupOfRoutesComponent, canActivate:[adminAuthGuard], children: [
+  {path:"", component: GroupOfRoutesComponent, children: [
     {path:"", component:DashboardComponent, title:"Admin Dashboard"},
-    {path:"orders", component:ProductComponent, title:"Orders Page"},
-    {path:"register", component:RegisterComponent, title:"Register"},
-    {path:"product", component:ProductComponent, title:"Product Page"},
     {path:"profile", component:ProfileComponent, title:"Admin Profile"},
+    {path:"product", component:ProductComponent, title:"Product Page"},
+    {path:"orders", component:ProductComponent, title:"Orders Page"},
     {path:"category", component:CategoryComponent, title:"Category Page"},
     {path:"subcategory", component:SubcategoryComponent, title:"Subcategory Page"},
+    {path:"register", component:RegisterComponent, title:"Register"},
   ]},
-  {path:"login", component:LoginComponent, canActivate:[adminLoginGuard], title:"Login"},
+  {path:"login", component:LoginComponent, title:"Login"},
   {path:"**", component:NotFoundComponent, title: "404 Page Not Found"},
 ];
 
