@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="d-flex justify-content-between">
+    <h3 class="mt-3">All Categories</h3>
+    <div class="mt-3 d-flex justify-content-center align-items-center">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control input"
+          placeholder="search"
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+        />
+        <button
+          class="btn btn-outline-secondary input"
+          type="button"
+          id="button-addon2"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+    </div>
+    <div>
+      <button type="button" class="btn creat mt-3">
+        <i class="fa-solid fa-plus me-3 plus"></i>Add New Product
+      </button>
+    </div>
+  </div>
+  <div class="container content mt-4">
+    <form (ngSubmit)="AddNewCategory()" #addProduct="ngForm">
+      <div class="mb-3 mt-3">
+        <label class="me-2">name: </label>
+        <input
+          class="form-control"
+          placeholder="Enter Product Name (required)"
+          type="text"
+          [(ngModel)]="category.name"
+          name="title"
+          required
+          minlength="4"
+          #productName="ngModel"
+          [ngClass]="{
+            'is-invalid':
+              (productName.touched || productName.dirty) && productName.invalid
+          }"
+        />
+        <span class="invalid-feedback">
+          <span *ngIf="productName.errors?.['required']"
+            >product name is required
+          </span>
+          <span *ngIf="productName.errors?.['minlength']"
+            >product name must be at least 4 characters
+          </span>
+        </span>
+      </div>
+      <div class="mb-3 mt-3">
+        <label class="me-2">title_ar:</label>
+        <input
+          class="form-control"
+          placeholder="Enter Product Name (required)"
+          type="text"
+          [(ngModel)]="category.name_ar"
+          name="title_ar"
+          required
+          minlength="4"
+          #productName="ngModel"
+          [ngClass]="{
+            'is-invalid':
+              (productName.touched || productName.dirty) && productName.invalid
+          }"
+        />
+        <span class="invalid-feedback">
+          <span *ngIf="productName.errors?.['required']"
+            >product name is required
+          </span>
+          <span *ngIf="productName.errors?.['minlength']"
+            >product name must be at least 4 characters
+          </span>
+        </span>
+      </div>
+      <div class="mb-3 mt-3">
+        <label class="me-2">img url:</label>
+        <input
+          placeholder="Enter Product image (required)"
+          class="form-control"
+          type="text"
+          [(ngModel)]="category.image"
+          name="images"
+          required
+          #productimage="ngModel"
+          [ngClass]="{
+            'is-invalid':
+              (productimage.touched || productimage.dirty) &&
+              productimage.invalid
+          }"
+        />
+        <span class="invalid-feedback">
+          <span *ngIf="productimage.errors?.['required']"
+            >product image is required
+          </span>
+        </span>
+      </div>
+      <button type="submit" class="mb-3" [disabled]="addProduct.invalid">
+        Add category
+      </button>
+    </form>
+  </div>
+</div>

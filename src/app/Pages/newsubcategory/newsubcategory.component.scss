@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  width: 100%;
+}
+.input
+  // .input2,
+  // .input2:focus
+{
+  background-color: #364153;
+  color: white;
+  border: none;
+}
+.creat {
+  background-color: #2fe5a7;
+  height: 40px;
+  color: black;
+}
+.container {
+  background-color: #1a202c;
+  color: white;
+}
+@media screen and (min-width: 951px) {
+}
+.container .form-content {
+  background-color: #19191a;
+}
+.photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #1a202c;
+}
+input,
+select,
+select:focus,
+input:focus {
+  background-color: #1a202c;
+  color: white;
+}
+// .select {
+//   margin-right: 55px;
+// }

@@ -1,6 +1,6 @@
 <div class="container h-100">
   <div class="d-flex justify-content-between">
-    <h3 class="mt-3">All Categoeies</h3>
+    <h3 class="mt-3">All Products</h3>
     <div class="mt-3 d-flex justify-content-center align-items-center">
       <!-- <input
             type="text"
@@ -25,29 +25,34 @@
         </button>
       </div>
     </div>
-    <a routerLink="/newcategory" class="nav-link link-light">
-      <button type="button" class="btn creat mt-3">
-        <i class="fa-solid fa-plus me-3 plus"></i>Add New category
-      </button>
-    </a>
+    <div>
+      <a routerLink="/newproduct" class="nav-link link-light">
+        <button type="button" class="btn creat mt-3">
+          <i class="fa-solid fa-plus me-3 plus"></i>Add New Product
+        </button>
+      </a>
+    </div>
   </div>
-  <div class="product" *ngFor="let category of AllCategories">
+  <div class="product" *ngFor="let product of AllProducts">
     <div class="d-flex mt-3 justify-content-around align-items-center">
-      <img class="img" [src]="category.image" [alt]="category.name" />
-      <p class="title-p">{{ category.name }}</p>
+      <img class="img" [src]="product.thumbnail" [alt]="product.title" />
+      <p class="title-p">{{ product.title }} ({{ product.quantity }})</p>
       <div>
         <a routerLink="/profile" class="nav-link link-light">
           <i class="fa-solid fa-book"></i>
           <span class="ms-3">Details</span>
         </a>
       </div>
-      <div class="d-flex flex-column justify-content-center align-items-center">
-        <div>
-          <i class="fa-solid fa-circle-plus me-3"></i>{{ category.createdAt }}
-        </div>
-        <div>
-          <i class="fa-solid fa-wrench me-3"></i>{{ category.updatedAt }}
-        </div>
+      <div>
+        <i class="fa-solid fa-calculator me-3"></i>{{ product.price }} EGP
+      </div>
+      <div>
+        reviews
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
       </div>
       <div class="d-flex justify-content-center align-items-center">
         <div
@@ -60,7 +65,7 @@
         >
           <i
             class="fa-solid fa-trash trach"
-            (click)="removeCategory(category._id)"
+            (click)="removeProduct(product._id)"
           ></i>
         </div>
       </div>
