@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,9 +16,13 @@ import { ProfileComponent } from './Component/profile/profile.component';
 import { SubcategoryComponent } from './Pages/subcategory/subcategory.component';
 import { SideNavComponent } from './Component/side-nav/side-nav.component';
 import { MobileSideNavComponent } from './Component/mobile-side-nav/mobile-side-nav.component';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withFetch,
+} from '@angular/common/http';
 import { AreaChartComponent } from './Component/area-chart/area-chart.component';
-import { BarChartComponent } from "./Component/bar-chart/bar-chart.component";
+import { BarChartComponent } from './Component/bar-chart/bar-chart.component';
 import { GroupOfRoutesComponent } from './Component/group-of-routes/group-of-routes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './Component/register/register.component';
@@ -24,38 +31,34 @@ import { AuthContainerComponent } from './Pages/auth-container/auth-container.co
 import { UserProfileComponent } from './Component/user-profile/user-profile.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        CategoryComponent,
-        DashboardComponent,
-        LoginComponent,
-        NotFoundComponent,
-        OrdersComponent,
-        ProductComponent,
-        ProfileComponent,
-        SubcategoryComponent,
-        SideNavComponent,
-        MobileSideNavComponent,
-        AreaChartComponent,
-        GroupOfRoutesComponent,
-        RegisterComponent,
+  declarations: [
+    AppComponent,
+    CategoryComponent,
+    DashboardComponent,
+    LoginComponent,
+    NotFoundComponent,
+    OrdersComponent,
+    ProductComponent,
+    ProfileComponent,
+    SubcategoryComponent,
+    SideNavComponent,
+    MobileSideNavComponent,
+    AreaChartComponent,
+    GroupOfRoutesComponent,
+    RegisterComponent,
     UserContainerComponent,
     AuthContainerComponent,
-    UserProfileComponent
-    ],
-    providers: [
-        provideClientHydration(),
-        provideHttpClient(withFetch())
-    ],
-    bootstrap: [AppComponent],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BarChartComponent,
+    UserProfileComponent,
+  ],
+  providers: [provideClientHydration(), provideHttpClient(withFetch())],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BarChartComponent,
     ReactiveFormsModule,
     FormsModule,
-
-    ]
+  ],
 })
-export class AppModule { }
+export class AppModule {}

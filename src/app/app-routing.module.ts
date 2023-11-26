@@ -13,23 +13,55 @@ import { AuthContainerComponent } from './Pages/auth-container/auth-container.co
 import { UserProfileComponent } from './Component/user-profile/user-profile.component';
 import { GroupOfRoutesComponent } from './Component/group-of-routes/group-of-routes.component';
 
-
 const routes: Routes = [
-  {path:"", component: GroupOfRoutesComponent, children: [
-    {path:"", component:DashboardComponent, title:"Admin Dashboard"},
-    {path:"profile", component:ProfileComponent, title:"Admin Profile"},
-    {path:"product", component:ProductComponent, title:"Product Page"},
-    {path:"orders", component:ProductComponent, title:"Orders Page"},
-    {path:"category", component:CategoryComponent, title:"Category Page"},
-    {path:"subcategory", component:SubcategoryComponent, title:"Subcategory Page"},
-    {path:"register", component:RegisterComponent, title:"Register"},
-  ]},
-  {path:"login", component:LoginComponent, title:"Login"},
-  {path:"**", component:NotFoundComponent, title: "404 Page Not Found"},
+  {
+    path: '',
+    component: GroupOfRoutesComponent,
+    children: [
+      { path: '', component: DashboardComponent, title: 'Admin Dashboard' },
+      { path: 'profile', component: ProfileComponent, title: 'Admin Profile' },
+      // {path:"product", component:ProductComponent, title:"Product Page"},
+      {
+        path: 'product',
+        loadChildren: () =>
+          import('./Component/product/product.module').then(
+            (m) => m.ProductModule
+          ),
+      },
+      {
+        path: 'category',
+        loadChildren: () =>
+          import('./Component/category/category.module').then(
+            (m) => m.CategoryModule
+          ),
+      },
+      {
+        path: 'subcategory',
+        loadChildren: () =>
+          import('./Component/subcategory/subcategory.module').then(
+            (m) => m.SubcategoryModule
+          ),
+      },
+      { path: 'orders', component: ProductComponent, title: 'Orders Page' },
+      // {
+      //   path: 'category',
+      //   component: CategoryComponent,
+      //   title: 'Category Page',
+      // },
+      // {
+      //   path: 'subcategory',
+      //   component: SubcategoryComponent,
+      //   title: 'Subcategory Page',
+      // },
+      { path: 'register', component: RegisterComponent, title: 'Register' },
+    ],
+  },
+  { path: 'login', component: LoginComponent, title: 'Login' },
+  { path: '**', component: NotFoundComponent, title: '404 Page Not Found' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
