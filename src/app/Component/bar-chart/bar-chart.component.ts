@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import Chart from 'chart.js/auto';
 import { ProductRequestsService } from '../../Services/product-requests.service';
 
@@ -11,6 +11,7 @@ import { ProductRequestsService } from '../../Services/product-requests.service'
   styleUrl: './bar-chart.component.scss',
 })
 export class BarChartComponent implements OnInit {
+  @ViewChild('barChart') canvas!: ElementRef;
   months: string[] = [
     'Jan',
     'Feb',
@@ -28,7 +29,7 @@ export class BarChartComponent implements OnInit {
   result: any;
   data: number[] = [];
   currentMonth = new Date().getMonth();
-  constructor(private productService: ProductRequestsService) {
+  constructor(private productService: ProductRequestsService, @Inject(PLATFORM_ID) private platformId: Object) {
     // Create a sorted array of months
     this.months = [
       ...this.months.slice(this.currentMonth),
@@ -51,7 +52,9 @@ export class BarChartComponent implements OnInit {
         this.data = this.result.map((data: any) => data.count)
       },
     });
-    this.createChart();
+    if (isPlatformBrowser(this.platformId)) {
+      this.createChart();
+    }
   }
 
   public chart: any;

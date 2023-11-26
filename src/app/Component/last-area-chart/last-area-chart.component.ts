@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -7,11 +8,13 @@ import Chart from 'chart.js/auto';
   styleUrl: './last-area-chart.component.scss'
 })
 export class LastAreaChartComponent implements OnInit  {
-
-  constructor() { }
+  @ViewChild('lastYearChart') canvas!: ElementRef;
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
-    this.createChart();
+    if (isPlatformBrowser(this.platformId)) {
+      this.createChart();
+    }
   }
 
   public chart: any;
