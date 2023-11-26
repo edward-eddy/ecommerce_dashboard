@@ -1,0 +1,183 @@
+<div class="container h-100">
+  <!-- nav start -->
+  <div
+    class="d-flex justify-content-between"
+    [ngClass]="{
+      'hide-on-small': isSmallScreen,
+      'show-on-small': !isSmallScreen
+    }"
+  >
+    <h3 class="mt-3 all-category" [routerLink]="['/category/category']">
+      All categories
+    </h3>
+    <div class="mt-3 d-flex justify-content-center align-items-center">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control input"
+          placeholder="search"
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+        />
+        <button
+          class="btn btn-outline-secondary input"
+          type="button"
+          id="button-addon2"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+    </div>
+    <div>
+      <button
+        type="button"
+        class="btn creat mt-3"
+        [routerLink]="['/category/newcategory']"
+      >
+        <i class="fa-solid fa-plus me-3 plus"></i>New category
+      </button>
+    </div>
+  </div>
+  <!-- collaps -->
+  <div
+    [ngClass]="{
+      'hide-on-small2': !isSmallScreen,
+      'show-on-small2': isSmallScreen
+    }"
+  >
+    <div class="mt-3 d-flex justify-content-end align-items-center">
+      <button class="btn creat">
+        <i class="fa-solid fa-bars" (click)="toggleNav()"></i>
+      </button>
+    </div>
+    <div *ngIf="!flagNav">
+      <div class="d-flex justify-content-end align-items-center">
+        <h3 class="mt-3 all-category" [routerLink]="['/category/category']">
+          All categories
+        </h3>
+      </div>
+      <div class="d-flex justify-content-end align-items-center">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control input"
+            placeholder="search"
+            aria-label="Recipient's username"
+            aria-describedby="button-addon2"
+          />
+          <button
+            class="btn btn-outline-secondary input"
+            type="button"
+            id="button-addon2"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end align-items-center">
+        <button
+          type="button"
+          class="btn creat mt-3"
+          [routerLink]="['/category/newcategory']"
+        >
+          <i class="fa-solid fa-plus me-3 plus"></i>New category
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- nav end -->
+  <!-- new category layout -->
+  <div class="content">
+    <form (ngSubmit)="AddNewCategory()" #addProduct="ngForm">
+      <div
+        class="d-flex justify-content-around align-items-center new-category"
+      >
+        <div class="mb-3 mt-3">
+          <label>img url:</label>
+          <input
+            placeholder="Enter Product image (required)"
+            class="form-control"
+            type="text"
+            [(ngModel)]="category.image"
+            name="images"
+            required
+            #productimage="ngModel"
+            [ngClass]="{
+              'is-invalid':
+                (productimage.touched || productimage.dirty) &&
+                productimage.invalid
+            }"
+          />
+          <span class="invalid-feedback">
+            <span *ngIf="productimage.errors?.['required']"
+              >product image is required
+            </span>
+          </span>
+        </div>
+        <div>
+          <div class="mb-3 mt-3">
+            <label>name: </label>
+            <input
+              class="form-control"
+              placeholder="Enter Product Name (required)"
+              type="text"
+              [(ngModel)]="category.name"
+              name="title"
+              required
+              minlength="4"
+              #productName="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  (productName.touched || productName.dirty) &&
+                  productName.invalid
+              }"
+            />
+            <span class="invalid-feedback">
+              <span *ngIf="productName.errors?.['required']"
+                >product name is required
+              </span>
+              <span *ngIf="productName.errors?.['minlength']"
+                >product name must be at least 4 characters
+              </span>
+            </span>
+          </div>
+          <div class="mb-3 mt-3">
+            <label>title_ar:</label>
+            <input
+              class="form-control"
+              placeholder="Enter Product Name (required)"
+              type="text"
+              [(ngModel)]="category.name_ar"
+              name="title_ar"
+              required
+              minlength="4"
+              #productName="ngModel"
+              [ngClass]="{
+                'is-invalid':
+                  (productName.touched || productName.dirty) &&
+                  productName.invalid
+              }"
+            />
+            <span class="invalid-feedback">
+              <span *ngIf="productName.errors?.['required']"
+                >product name is required
+              </span>
+              <span *ngIf="productName.errors?.['minlength']"
+                >product name must be at least 4 characters
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center align-items-center">
+        <button
+          type="submit"
+          class="btn creat mt-3 mb-3"
+          [disabled]="addProduct.invalid"
+        >
+          Update Category
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
