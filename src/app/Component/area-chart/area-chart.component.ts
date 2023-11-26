@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -7,17 +8,22 @@ import Chart from 'chart.js/auto';
   styleUrl: './area-chart.component.scss'
 })
 export class AreaChartComponent implements OnInit {
-
-  constructor() { }
+  @ViewChild('MyChart') canvas!: ElementRef;
+  public chart: any;
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
-    this.createChart();
+    if (isPlatformBrowser(this.platformId)) {
+      this.createChart();
+    }
   }
 
-  public chart: any;
+  // public chart: any;
 
   createChart() {
-    this.chart = new Chart("MyChart", {
+    // document.getElementById
+    // this.chart = new Chart("MyChart", {
+      this.chart = new Chart(this.canvas.nativeElement.getContext('2d'), {
       type: 'line',
       data: {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],

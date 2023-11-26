@@ -25,7 +25,7 @@ export class UserRequestsService {
 
     login(user : IUser) : Observable<object>{
       // let token = 'token';
-      // localStorage.setItem('userToken', token);
+      // localStorage.setItem('token', token);
       console.log(user);
 
       return this.httpClient.post<IUser>(`${environment.BAseApiURL}/users/signin` , user , this.httpheader).pipe(
@@ -56,7 +56,7 @@ export class UserRequestsService {
     }
 
     logout(){
-      localStorage.removeItem('userToken');
+      localStorage.removeItem('token');
       this.userLoggedBehavior.next(false);
     }
 

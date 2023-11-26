@@ -16,12 +16,19 @@ export class LoginComponent {
     this.userLoginForm = this.formBuilder.group({
       email : ['' , [Validators.required , Validators.email]],
       password : ['' , [Validators.required , Validators.minLength(6)]]
-
     })
 
     console.log(userService.isUserLogged);
-    if(userService.isUserLogged){
-      router.navigate(['/'])
+    // if(userService.isUserLogged){
+    //   router.navigate(['/'])
+    // }
+    // this.isLoggedFunc()
+
+  }
+
+  isLoggedFunc(){
+    if(this.userService.isUserLogged){
+      this.router.navigate(['/'])
     }
 
   }
