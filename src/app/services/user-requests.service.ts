@@ -67,30 +67,11 @@ export class UserRequestsService {
       // return  token ? true : false;
       return (localStorage.getItem('token'))? true : false;
     }
-    // get isUserLogged(): boolean {
-    //   if (typeof localStorage !== 'undefined') {
-    //     let token = localStorage.getItem('token');
-    //     console.log(localStorage, token);
-    //     if (typeof token == 'string'){
-    //       return true
-    //     } else {
-    //       return false
-    //     }
-
-    //   } else {
-    //     // Handle the case when localStorage is not available
-    //     console.log('localStorage is not available.');
-    //     return false;
-    //   }
-    // }
 
 
     getUserLoggedStatus():Observable<boolean> {
       return this.userLoggedBehavior.asObservable();
     }
-
-
-
 
 
     addNewUser(user : IUser): Observable<IUser>{

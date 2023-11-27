@@ -23,8 +23,6 @@ export class ProductRequestsService {
     result: [{ count: number; year: number; month: number }];
     productCount: number;
   }> {
-    console.log("product");
-
     return this.httpClient.get<{
       result: [{ count: number; year: number; month: number }];
       productCount: number;

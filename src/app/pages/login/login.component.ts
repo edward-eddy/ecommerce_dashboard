@@ -55,7 +55,7 @@ export class LoginComponent {
       next :(data) =>{
         let token = JSON.stringify(data)
         let tokenData = JSON.parse(token)
-        console.log(tokenData.token);
+        // console.log(tokenData.token);
         localStorage.setItem("token", tokenData.token);
         this.router.navigate(["/"])
 
