@@ -69,7 +69,13 @@ export class UserRequestsService {
     get isUserLogged(): boolean {
       if (typeof localStorage !== 'undefined') {
         let token = localStorage.getItem('token');
-        return token ? true : false;
+        console.log(localStorage, token);
+        if (typeof token == 'string'){
+          return true
+        } else {
+          return false
+        }
+
       } else {
         // Handle the case when localStorage is not available
         console.log('localStorage is not available.');

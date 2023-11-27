@@ -32,9 +32,9 @@ export class RegisterComponent {
 
 
     })
-    if(!userService.isUserLogged){
-      router.navigate(['/'])
-    }
+    // if(!userService.isUserLogged){
+    //   router.navigate(['/'])
+    // }
   }
 
   get name(){

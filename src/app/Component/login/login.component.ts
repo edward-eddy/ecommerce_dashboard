@@ -18,7 +18,7 @@ export class LoginComponent {
       password : ['' , [Validators.required , Validators.minLength(6)]]
     })
 
-    console.log(userService.isUserLogged);
+    // console.log(userService.isUserLogged);
     // if(userService.isUserLogged){
     //   router.navigate(['/'])
     // }

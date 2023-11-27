@@ -21,9 +21,7 @@ export class AreaChartComponent implements OnInit {
   // public chart: any;
 
   createChart() {
-    // document.getElementById
-    // this.chart = new Chart("MyChart", {
-      this.chart = new Chart(this.canvas.nativeElement.getContext('2d'), {
+    this.chart = new Chart("MyChart", {
       type: 'line',
       data: {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
