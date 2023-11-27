@@ -1,0 +1,52 @@
+.orSpan{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  background-color: #19191A;
+  height: 25px;
+  width: 40px;
+  text-align: center;
+}
+::placeholder{
+  color: #fff;
+}
+
+::-moz-placeholder{
+  color: #fff;
+
+}
+::-ms-input-placeholder{
+  color: #fff;
+}
+
+
+.loginInput{
+  background-color: #1A202C;
+  color: #fff;
+  border: 0px solid transparent;
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+  height: 45px;
+  line-height: 45px;
+  padding-left: 5%;
+  transition: all 0.1s ease-in-out;
+}
+
+button:hover{
+  background-color: #37445e;
+}
+
+.authChangeBtn{
+  background-color: transparent;
+  border: 0px solid transparent;
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+}
+.authChangeBtn:hover{
+  background-color: transparent;
+  text-decoration: underline;
+
+}
