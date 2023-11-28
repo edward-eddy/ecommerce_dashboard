@@ -1,5 +1,8 @@
 import { NgModule, Component } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,7 +11,6 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CategoryComponent } from './pages/category/category.component';
-import { SubcategoryComponent } from './pages/subcategory/subcategory.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -19,7 +21,11 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { MobileSideNavComponent } from './components/mobile-side-nav/mobile-side-nav.component';
 import { GroupOfRoutesComponent } from './components/group-of-routes/group-of-routes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withFetch,
+} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,7 +35,6 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
     ProductsComponent,
     ProfileComponent,
     CategoryComponent,
-    SubcategoryComponent,
     RegisterComponent,
     LoginComponent,
     NotFoundComponent,
@@ -38,18 +43,16 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
     BarChartComponent,
     SideNavComponent,
     MobileSideNavComponent,
-    GroupOfRoutesComponent
+    GroupOfRoutesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [
-    provideClientHydration(), provideHttpClient(withFetch())
-  ],
-  bootstrap: [AppComponent]
+  providers: [provideClientHydration(), provideHttpClient(withFetch())],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
