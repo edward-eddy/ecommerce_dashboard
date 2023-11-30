@@ -26,6 +26,9 @@ import {
   provideHttpClient,
   withFetch,
 } from '@angular/common/http';
+import { OrderCardComponent } from './components/order-card/order-card.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { ProductCardOrderDetailsComponent } from './components/product-card-order-details/product-card-order-details.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,9 @@ import {
     SideNavComponent,
     MobileSideNavComponent,
     GroupOfRoutesComponent,
+    OrderCardComponent,
+    OrderDetailsComponent,
+    ProductCardOrderDetailsComponent,
   ],
   imports: [
     BrowserModule,

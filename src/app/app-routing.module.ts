@@ -11,6 +11,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,8 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent, title: 'Admin Dashboard' },
       { path: 'orders', component: OrdersComponent, title: 'Orders Page' },
+      { path: 'orders/:id', component: OrderDetailsComponent, title: 'Orders details Page' },
+
       { path: 'register', component: RegisterComponent, title: 'Register' },
       { path: 'product', component: ProductsComponent, title: 'Product Page' },
       { path: 'profile', component: ProfileComponent, title: 'Admin Profile' },
