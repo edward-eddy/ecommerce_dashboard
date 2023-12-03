@@ -65,35 +65,44 @@ export class EditcategoryComponent implements OnInit {
   }
   //=============< Creat New Category >===================================================
   AddNewCategory() {
-    if (!this.files[0]) {
-      alert('upload image first');
-      return;
+    if (this.files[0]) {
+      const file_data = this.files[0];
+      const data = new FormData();
+      data.append('file', file_data);
+      data.append('upload_preset', 'angular-cloudinary');
+      data.append('cloud_name', 'doksixv16');
+
+      this.categoryService.uploadImage(data).subscribe((res) => {
+        if (res) {
+          // console.log(res);
+          this.image = res.secure_url;
+          // console.log('image', this.image);
+          this.category.image = this.image;
+          this.categoryService
+            .updateCtegory(this.currentCategory, this.category)
+            .subscribe({
+              next: (data) => {
+                // console.log(data);
+                this.router.navigate([`/category/category`]);
+              },
+              error: (err) => {
+                console.log(err);
+              },
+            });
+        }
+      });
     }
 
-    const file_data = this.files[0];
-    const data = new FormData();
-    data.append('file', file_data);
-    data.append('upload_preset', 'angular-cloudinary');
-    data.append('cloud_name', 'doksixv16');
-
-    this.categoryService.uploadImage(data).subscribe((res) => {
-      if (res) {
-        // console.log(res);
-        this.image = res.secure_url;
-        // console.log('image', this.image);
-        this.category.image = this.image;
-        this.categoryService
-          .updateCtegory(this.currentCategory, this.category)
-          .subscribe({
-            next: (data) => {
-              // console.log(data);
-              this.router.navigate([`/category/category`]);
-            },
-            error: (err) => {
-              console.log(err);
-            },
-          });
-      }
-    });
+    this.categoryService
+      .updateCtegory(this.currentCategory, this.category)
+      .subscribe({
+        next: (data) => {
+          // console.log(data);
+          this.router.navigate([`/category/category`]);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 }

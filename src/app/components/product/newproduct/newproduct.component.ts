@@ -67,7 +67,7 @@ export class NewproductComponent implements OnInit {
   onSelectImage(event) {
     this.files.push(...event.addedFiles);
     const selectedFile = event.addedFiles[0];
-    // console.log(this.files.slice(0 - 4));
+    console.log(this.files.slice(0 - 4));
   }
   onRemove(event) {
     // console.log(event);
@@ -82,7 +82,7 @@ export class NewproductComponent implements OnInit {
   }
   //==========< Add New Product >===============================================
   AddNewProduct() {
-    if (!this.file[0] || this.files.length <= 4) {
+    if (!this.file[0] || this.files.length < 4) {
       alert('Please upload at least one thumbnail and four images.');
       return;
     }
@@ -96,7 +96,7 @@ export class NewproductComponent implements OnInit {
       .uploadImage(thumbnailFormData)
       .subscribe((thumbnailRes) => {
         if (thumbnailRes) {
-          // console.log('cover image', thumbnailRes);
+          console.log('cover image', thumbnailRes);
           this.thumbnailUrl = thumbnailRes.secure_url;
           this.product.thumbnail = this.thumbnailUrl;
           this.uploadImagesSequentially(0);
@@ -113,14 +113,14 @@ export class NewproductComponent implements OnInit {
 
       this.productsService.uploadImage(imageFormData).subscribe((imageRes) => {
         this.imageUrls.push(imageRes.secure_url);
-        // console.log('imgs', this.imageUrls);
         this.uploadImagesSequentially(index + 1);
+        console.log('imgs', this.imageUrls);
         this.product.images = this.imageUrls;
       });
     } else {
       this.productsService.insertNewProduct(this.product).subscribe({
         next: (data) => {
-          // console.log(data);
+          console.log(data);
           this.router.navigate(['/product/product']);
         },
         error: (err) => {
