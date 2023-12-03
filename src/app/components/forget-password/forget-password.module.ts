@@ -4,6 +4,7 @@ import { EnterEmailComponent } from './enter-email/enter-email.component';
 import { EnterCodeComponent } from './enter-code/enter-code.component';
 import { NewPasswordComponent } from './new-password/new-password.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -25,26 +26,16 @@ const routes: Routes = [
     path: `newPassword`,
     component: NewPasswordComponent,
     title: `Enter your new Password`,
-  },
-  // {
-  //   path: `mail`,
-  //   component: EnterEmailComponent,
-  //   title: `E-Mail Check`,
-  // },
-  // {
-  //   path: `code`,
-  //   component: EnterCodeComponent,
-  //   title: `Code Check`,
-  // },
-  // {
-  //   path: `newPassword`,
-  //   component: NewPasswordComponent,
-  //   title: `Enter your new Password`,
-  // },
+  }
 ];
 
 @NgModule({
   declarations: [EnterEmailComponent, EnterCodeComponent, NewPasswordComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    ReactiveFormsModule,
+    FormsModule,
+  ],
 })
 export class ForgetPasswordModule {}
