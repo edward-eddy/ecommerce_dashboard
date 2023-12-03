@@ -22,10 +22,12 @@ import { MobileSideNavComponent } from './components/mobile-side-nav/mobile-side
 import { GroupOfRoutesComponent } from './components/group-of-routes/group-of-routes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
+  HTTP_INTERCEPTORS,
   HttpClientModule,
   provideHttpClient,
   withFetch,
 } from '@angular/common/http';
+import { adminTokenInterceptor } from './admin-token.interceptor';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,15 @@ import {
     FormsModule,
     HttpClientModule,
   ],
-  providers: [provideClientHydration(), provideHttpClient(withFetch())],
+  providers: [
+    provideClientHydration(),
+    provideHttpClient(withFetch()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: adminTokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

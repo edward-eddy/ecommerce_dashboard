@@ -14,7 +14,7 @@ export class UserRequestsService {
     httpheader={};
 
   constructor(private httpClient:HttpClient) {
-    this.userLoggedBehavior = new BehaviorSubject<boolean>(this.isUserLogged);
+    // this.userLoggedBehavior = new BehaviorSubject<boolean>(this.isUserLogged);
 
   }
 
@@ -24,21 +24,21 @@ export class UserRequestsService {
 
 
 
-    login(user : IUser) : Observable<object>{
-      // let token = 'token';
-      // localStorage.setItem('token', token);
-      console.log(user);
+    // login(user : IUser) : Observable<object>{
+    //   // let token = 'token';
+    //   // localStorage.setItem('token', token);
+    //   console.log(user);
 
-      return this.httpClient.post<IUser>(`${environment.BAseApiURL}/users/signin` , user , this.httpheader).pipe(
-        retry(3),
-        catchError((err)=>{
-          return throwError(()=>{
-            this.userLoggedBehavior.next(true);
-            return new Error ('Error While Adding user')
-          })
-        })
-      )
-    }
+    //   return this.httpClient.post<IUser>(`${environment.BAseApiURL}/users/signin` , user , this.httpheader).pipe(
+    //     retry(3),
+    //     catchError((err)=>{
+    //       return throwError(()=>{
+    //         this.userLoggedBehavior.next(true);
+    //         return new Error ('Error While Adding user')
+    //       })
+    //     })
+    //   )
+    // }
 
     signup(user : IUser) : Observable<IUser>{
       // let token = 'token';
@@ -56,22 +56,22 @@ export class UserRequestsService {
       // this.userLoggedBehavior.next(true);
     }
 
-    logout(){
-      localStorage.removeItem('token');
-      this.userLoggedBehavior.next(false);
-    }
+    // logout(){
+    //   localStorage.removeItem('token');
+    //   this.userLoggedBehavior.next(false);
+    // }
 
     // Error Maker
-    get isUserLogged(): boolean {
-      // let token = localStorage.getItem('token')
-      // return  token ? true : false;
-      return (localStorage.getItem('token'))? true : false;
-    }
+    // get isUserLogged(): boolean {
+    //   // let token = localStorage.getItem('token')
+    //   // return  token ? true : false;
+    //   return (localStorage.getItem('token'))? true : false;
+    // }
 
 
-    getUserLoggedStatus():Observable<boolean> {
-      return this.userLoggedBehavior.asObservable();
-    }
+    // getUserLoggedStatus():Observable<boolean> {
+    //   return this.userLoggedBehavior.asObservable();
+    // }
 
 
     addNewUser(user : IUser): Observable<IUser>{

@@ -1,4 +1,11 @@
-import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  ViewChild,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import Chart from 'chart.js/auto';
 import { ProductRequestsService } from '../../services/product-requests.service';
@@ -6,7 +13,7 @@ import { ProductRequestsService } from '../../services/product-requests.service'
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
-  styleUrl: './bar-chart.component.scss'
+  styleUrl: './bar-chart.component.scss',
 })
 export class BarChartComponent implements OnInit {
   @ViewChild('barChart') canvas!: ElementRef;
@@ -27,7 +34,10 @@ export class BarChartComponent implements OnInit {
   result: any;
   data: number[] = [];
   currentMonth = new Date().getMonth();
-  constructor(private productService: ProductRequestsService, @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(
+    private productService: ProductRequestsService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
     // Create a sorted array of months
     this.months = [
       ...this.months.slice(this.currentMonth),
@@ -38,20 +48,24 @@ export class BarChartComponent implements OnInit {
   ngOnInit(): void {
     this.result = this.productService.getProductCountPerYear().subscribe({
       next: (data) => {
-        data.result.sort((a, b) => {
-          const indexA = (a.month - this.currentMonth + 11) % 12;
-          const indexB = (b.month - this.currentMonth + 11) % 12;
-          return indexA - indexB;
-        });
-        this.result = data.result;
-        this.data = this.result.map((data: any) => data.count)
+        if (data.result) {
+          data.result.sort((a, b) => {
+            const indexA = (a.month - this.currentMonth + 11) % 12;
+            const indexB = (b.month - this.currentMonth + 11) % 12;
+            return indexA - indexB;
+          });
+          this.result = data.result;
+          this.data = this.result.map((data: any) => data.count);
 
-        if (isPlatformBrowser(this.platformId)) {
-          this.createChart();
+          if (isPlatformBrowser(this.platformId)) {
+            this.createChart();
+          }
         }
       },
+      error: (err) => {
+        // console.log(err);
+      },
     });
-
   }
 
   public chart: any;

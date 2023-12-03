@@ -3,69 +3,55 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUser } from '../../models/iuser';
 import { UserRequestsService } from '../../services/user-requests.service';
+import { AdminAuthService } from '../../services/admin-auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  userLoginForm : FormGroup;
-  user : IUser = {} as IUser
-  constructor (private formBuilder : FormBuilder , private router : Router ,private userService : UserRequestsService){
+  userLoginForm: FormGroup;
+  user: IUser = {} as IUser;
+  checked: boolean
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private adminAuth: AdminAuthService
+  ) {
     this.userLoginForm = this.formBuilder.group({
-      email : ['' , [Validators.required , Validators.email]],
-      password : ['' , [Validators.required , Validators.minLength(6)]]
-    })
-
-    // console.log(userService.isUserLogged);
-    // if(userService.isUserLogged){
-    //   router.navigate(['/'])
-    // }
-    // this.isLoggedFunc()
-
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
   }
 
-  isLoggedFunc(){
-    if(this.userService.isUserLogged){
-      this.router.navigate(['/'])
+  logCheck(e) {
+    this.checked = e.target.checked
+  }
+
+  get email() {
+    return this.userLoginForm.get('email');
+  }
+  get password() {
+    return this.userLoginForm.get('password');
+  }
+
+  moveToRegister() {
+    this.router.navigate(['/register']);
+  }
+
+  loginFunc() {
+    const val = this.userLoginForm.value;
+    if (val.email && val.password) {
+      this.adminAuth.login(val.email, val.password).subscribe({
+        next: (data) => {
+          this.checked
+          ? this.adminAuth.setCookie(data)
+          : this.adminAuth.setSession(data);
+
+          this.router.navigateByUrl('/');
+        },
+      });
     }
-
   }
-
-
-  get email(){
-    return this.userLoginForm.get('email')
-  }
-  get password(){
-    return this.userLoginForm.get('password')
-  }
-
-
-
-  moveToRegister(){
-
-    this.router.navigate(["/register"])
-
-  }
-
-
-  loginFunc(){
-    this.userService.login(this.userLoginForm.value).subscribe({
-      next :(data) =>{
-        let token = JSON.stringify(data)
-        let tokenData = JSON.parse(token)
-        // console.log(tokenData.token);
-        localStorage.setItem("token", tokenData.token);
-        this.router.navigate(["/"])
-
-      },
-      error(err) {
-        console.log(err);
-
-      },
-    })
-  }
-
-
 }
