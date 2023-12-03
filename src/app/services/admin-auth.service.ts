@@ -26,7 +26,7 @@ export class AdminAuthService {
     return this.httpClient
       .post<IUser>(
         `${environment.BAseApiURL}/admin/login`,
-        {email, password},
+        { email, password },
         // user,
         this.httpHeader
       )
@@ -42,37 +42,38 @@ export class AdminAuthService {
   }
 
   setSession(authResult) {
-    sessionStorage.setItem("token", authResult.token)
+    sessionStorage.setItem('token', authResult.token);
   }
 
   setCookie(authResult) {
     const expiryDate = new Date();
-    expiryDate.setSeconds(expiryDate.getSeconds() + authResult.expires_at)
-    document.cookie=`token=${authResult.token};expires=${expiryDate}`
+    expiryDate.setSeconds(expiryDate.getSeconds() + authResult.expires_at);
+    document.cookie = `token=${authResult.token};expires=${expiryDate}`;
   }
 
   logout() {
-    let date = new Date()
+    let date = new Date();
     date.setDate(date.getDate() - 1);
     // case remember me
     document.cookie = `token=null;expires=${date}`;
     // normal case
-    sessionStorage.removeItem("token")
-    this.router.navigateByUrl('/login')
+    sessionStorage.removeItem('token');
+    this.router.navigateByUrl('/login');
   }
   get isUserLogged(): boolean {
-    let token = this.getToken()
-    return token? true: false;
+    let token = this.getToken();
+    return token ? true : false;
   }
 
-  getToken(){
-    const sessionToken = sessionStorage.getItem("token")
-    console.log(sessionToken);
-    
-    let cookies = document.cookie.split(/[;=]/)
-    let cookiesToken = (cookies.indexOf("token") !== -1)
-    ?  cookies[cookies.indexOf("token")+1]
-    : null
-    return sessionToken? sessionToken : cookiesToken
+  getToken() {
+    const sessionToken = sessionStorage.getItem('token');
+    // console.log(sessionToken);
+
+    let cookies = document.cookie.split(/[;=]/);
+    let cookiesToken =
+      cookies.indexOf('token') !== -1
+        ? cookies[cookies.indexOf('token') + 1]
+        : null;
+    return sessionToken ? sessionToken : cookiesToken;
   }
 }

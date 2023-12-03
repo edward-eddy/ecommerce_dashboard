@@ -102,8 +102,17 @@ export class EditproductComponent implements OnInit {
   //==========< update Product >===============================================
   updateProduct() {
     if (!this.file[0] || this.files.length <= 4) {
-      alert('Please upload at least one thumbnail and four images.');
-      return;
+      this.productsService
+        .updateProduct(this.currentproduct, this.product)
+        .subscribe({
+          next: (data) => {
+            // console.log(data);
+            this.router.navigate([`/product/product`]);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
     }
 
     const thumbnailFormData = new FormData();
@@ -122,7 +131,6 @@ export class EditproductComponent implements OnInit {
         }
       });
   }
-
   uploadImagesSequentially(index: number) {
     if (index < this.files.length) {
       const imageFormData = new FormData();
@@ -136,18 +144,17 @@ export class EditproductComponent implements OnInit {
         this.uploadImagesSequentially(index + 1);
         this.product.images = this.imageUrls;
       });
-    } else {
-      this.productsService
-        .updateProduct(this.currentproduct, this.product)
-        .subscribe({
-          next: (data) => {
-            // console.log(data);
-            this.router.navigate([`/product/product`]);
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
     }
+    this.productsService
+      .updateProduct(this.currentproduct, this.product)
+      .subscribe({
+        next: (data) => {
+          // console.log(data);
+          this.router.navigate([`/product/product`]);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 }
