@@ -26,15 +26,16 @@ export class DetailsubcategoryComponent implements OnInit {
       .subscribe((result) => {
         this.isSmallScreen = !result.matches;
       });
+    //======================< current subcategory >==================================================
 
     this.activetedRout.paramMap.subscribe((paramMap) => {
       this.currentSubCategory = paramMap.get(`id`);
-      console.log(this.currentSubCategory);
+      // console.log(this.currentSubCategory);
       this.subcategoryService
         .getSubCategoryById(this.currentSubCategory)
         .subscribe((data) => {
           if (data) {
-            console.log(data);
+            // console.log(data);
             this.subcategory = (data as any).data || [];
           } else {
             alert('this category is not found');

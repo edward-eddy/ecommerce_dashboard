@@ -27,7 +27,7 @@ export class SubcategoryComponent {
     this.subCategoryServec.getAllSubCategories().subscribe({
       next: (response) => {
         this.AllsubCategories = (response as any).data || [];
-        console.log(this.AllsubCategories);
+        // console.log(this.AllsubCategories);
         this.AllsubCategories.forEach((category) => {
           return category.createdAt, category.updatedAt;
         });
@@ -59,7 +59,7 @@ export class SubcategoryComponent {
     this.subCategoryServec.getAllSubCategories().subscribe({
       next: (response) => {
         this.AllsubCategories = (response as any).data || [];
-        console.log(this.AllsubCategories);
+        // console.log(this.AllsubCategories);
       },
       error: (err) => {
         console.log(err);

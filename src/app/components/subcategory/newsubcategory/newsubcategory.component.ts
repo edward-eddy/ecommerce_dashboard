@@ -14,6 +14,7 @@ import { CategoryService } from '../../../services/category.service';
 export class NewsubcategoryComponent {
   AllCategories: Category[] = [];
   subCategory: Subcategory = {} as Subcategory;
+  image: string = '';
   isSmallScreen: boolean = false;
   flagNav: boolean = true;
   constructor(
@@ -38,20 +39,55 @@ export class NewsubcategoryComponent {
         this.isSmallScreen = !result.matches;
       });
   }
+  //============================< image upload >================================================
+
+  files: File[] = [];
+
+  onSelect(event) {
+    // console.log(event);
+    this.files.push(...event.addedFiles);
+    // console.log(this.files[0]);
+  }
+
+  onRemove(event) {
+    // console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+  }
   //=============< toggle nave >==========================================================
   toggleNav() {
     this.flagNav = !this.flagNav;
   }
   //=============< Creat New subCategory >===================================================
   AddNewsubCategory() {
-    this.subcategoryService.insertNewSubCategory(this.subCategory).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.router.navigate([`/subcategory/subcategory`]);
-      },
-      error: (err) => {
-        console.log(err);
-      },
+    if (!this.files[0]) {
+      alert('upload image first');
+      return;
+    }
+
+    const file_data = this.files[0];
+    const data = new FormData();
+    data.append('file', file_data);
+    data.append('upload_preset', 'angular-cloudinary');
+    data.append('cloud_name', 'doksixv16');
+
+    this.subcategoryService.uploadImage(data).subscribe((res) => {
+      if (res) {
+        console.log(res);
+        this.image = res.secure_url;
+        // console.log('image', this.image);
+        this.subCategory.image = this.image;
+        this.subcategoryService
+          .insertNewSubCategory(this.subCategory)
+          .subscribe({
+            next: (data) => {
+              console.log(data);
+              this.router.navigate(['/subcategory/subcategory']);
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
+      }
     });
   }
 }

@@ -21,40 +21,46 @@
   color: white;
   border: none;
 }
-.categories {
-  background-color: #19191a;
+img {
+  width: 300px;
+  height: 300px;
+  border-radius: 20px;
 }
-// .title-p {
-//   width: 140px;
-// }
 i {
   color: #2fe5a7;
+  font-size: 20px;
 }
-.trach {
-  color: #ff69b4;
+.content {
+  background-color: #19191a;
+  margin-top: 8% !important;
 }
-.img {
-  width: 80px;
-  height: 80px;
-  margin: 10px;
+.all-category {
+  cursor: pointer;
 }
-.pencil-icon {
-  width: 50px;
-  height: 50px;
+.review {
+  background-color: #19191a;
+}
+.user {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background-color: #2fe5a843;
+  background-color: white;
+}
+.user-icon {
+  color: #1a202c;
+}
+.stars {
+  font-size: 10px;
+  color: #2fe5a7;
 }
 .trach-icon {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: #ff69b43e;
 }
-.all-category,
-.details,
-.icon,
 .icon2 {
-  cursor: pointer;
+  color: #ff69b4;
 }
 //===========< media query >=======================
 //===========< nav media >==========================
@@ -77,36 +83,29 @@ i {
     display: block !important;
   }
 }
-.all-product {
-  cursor: pointer;
-}
-//===========< product media >======================
-@media only screen and (max-width: 1063px) {
+//===========< category details media >======================
+
+@media only screen and (max-width: 870px) {
   .content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 10px 0;
+  }
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
   }
 }
-@media only screen and (max-width: 665px) {
-  .category {
+//================< review media >====================
+@media only screen and (max-width: 607px) {
+  .comment {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-}
-@media only screen and (max-width: 337px) {
-  .hide-on-small3 {
-    display: none !important;
-  }
-
-  .show-on-small3 {
-    display: block !important;
-  }
-  .icon {
-    margin-right: 10px !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }

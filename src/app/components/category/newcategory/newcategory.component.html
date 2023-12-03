@@ -88,82 +88,76 @@
   <!-- nav end -->
   <!-- new category layout -->
   <div class="content">
-    <form (ngSubmit)="AddNewCategory()" #addProduct="ngForm">
+    <form (ngSubmit)="AddNewCategory()" #addcategory="ngForm">
       <div
         class="d-flex justify-content-around align-items-center new-category"
       >
         <div class="mb-3 mt-3">
-          <label>img url:</label>
-          <input
-            placeholder="Enter Product image (required)"
-            class="form-control"
-            type="text"
-            [(ngModel)]="category.image"
-            name="images"
-            required
-            #productimage="ngModel"
-            [ngClass]="{
-              'is-invalid':
-                (productimage.touched || productimage.dirty) &&
-                productimage.invalid
-            }"
-          />
-          <span class="invalid-feedback">
-            <span *ngIf="productimage.errors?.['required']"
-              >product image is required
-            </span>
-          </span>
+          <ngx-dropzone (change)="onSelect($event)">
+            <ngx-dropzone-label
+              ><i class="fa-solid fa-camera-retro fs-3 camera"></i
+            ></ngx-dropzone-label>
+            <ngx-dropzone-image-preview
+              class="selected-image-container"
+              ngProjectAs="ngx-dropzone-preview"
+              *ngFor="let f of files"
+              [file]="f"
+              [removable]="true"
+              (removed)="onRemove(f)"
+            >
+            </ngx-dropzone-image-preview>
+          </ngx-dropzone>
         </div>
         <div>
           <div class="mb-3 mt-3">
             <label>name: </label>
             <input
               class="form-control"
-              placeholder="Enter Product Name (required)"
+              placeholder="category Name (required)"
               type="text"
               [(ngModel)]="category.name"
-              name="title"
+              name="name"
               required
               minlength="4"
-              #productName="ngModel"
+              #categoryName="ngModel"
               [ngClass]="{
                 'is-invalid':
-                  (productName.touched || productName.dirty) &&
-                  productName.invalid
+                  (categoryName.touched || categoryName.dirty) &&
+                  categoryName.invalid
               }"
             />
             <span class="invalid-feedback">
-              <span *ngIf="productName.errors?.['required']"
-                >product name is required
+              <span *ngIf="categoryName.errors?.['required']"
+                >category name is required
               </span>
-              <span *ngIf="productName.errors?.['minlength']"
-                >product name must be at least 4 characters
+              <span *ngIf="categoryName.errors?.['minlength']"
+                >category name must be at least 4 characters
               </span>
             </span>
           </div>
           <div class="mb-3 mt-3">
-            <label>title_ar:</label>
+            <label>name_ar:</label>
             <input
               class="form-control"
-              placeholder="Enter Product Name (required)"
+              placeholder="category Name_ar (required)"
               type="text"
               [(ngModel)]="category.name_ar"
-              name="title_ar"
+              name="Name_ar"
               required
               minlength="4"
-              #productName="ngModel"
+              #categoryNameAr="ngModel"
               [ngClass]="{
                 'is-invalid':
-                  (productName.touched || productName.dirty) &&
-                  productName.invalid
+                  (categoryNameAr.touched || categoryNameAr.dirty) &&
+                  categoryNameAr.invalid
               }"
             />
             <span class="invalid-feedback">
-              <span *ngIf="productName.errors?.['required']"
-                >product name is required
+              <span *ngIf="categoryNameAr.errors?.['required']"
+                >category name_ar is required
               </span>
-              <span *ngIf="productName.errors?.['minlength']"
-                >product name must be at least 4 characters
+              <span *ngIf="categoryNameAr.errors?.['minlength']"
+                >category name_ar must be at least 4 characters
               </span>
             </span>
           </div>
@@ -173,7 +167,7 @@
         <button
           type="submit"
           class="btn creat mt-3 mb-3"
-          [disabled]="addProduct.invalid"
+          [disabled]="addcategory.invalid"
         >
           Creat New category
         </button>
