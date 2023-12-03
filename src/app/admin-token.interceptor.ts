@@ -25,12 +25,14 @@ export class adminTokenInterceptor implements HttpInterceptor {
         (response) => {
         if (response instanceof HttpResponse) {
           // XXXXXXXXXXXXXXXXXXXXX NOT WORKING XXXXXXXXXXXXXXXXXXXXX
-          if (response.status == 401 && response.body.message === "Invalid token, logOut") {
-            this.adminAuth.logout()
-          }
+          // if (response.status == 401 || response.body.message === "Invalid token, logOut" || response.body.message === "invalid token") {
+          //   this.adminAuth.logout()
+          // }
         }
       },
       (error) => {
+        console.log("=================>", error.error.message);
+
         if (error.status === 401 && error.error.message === "Invalid token, logOut")
         this.adminAuth.logout()
       })

@@ -23,12 +23,6 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent, title: 'Register' },
       { path: 'product', component: ProductsComponent, title: 'Product Page' },
       { path: 'profile', component: ProfileComponent, title: 'Admin Profile' },
-      // {
-      //   path: 'category',
-      //   component: CategoryComponent,
-      //   title: 'Category Page',
-      // },
-      // {path:"subcategory", component:SubcategoryComponent, title:"Subcategory Page"},
       {
         path: 'subcategory',
         loadChildren: () =>
@@ -50,6 +44,13 @@ const routes: Routes = [
     component: LoginComponent,
     canActivate: [adminLoginGuard],
     title: 'Login',
+  },
+  {
+    path: 'resetPassword',
+    loadChildren: () =>
+      import('./components/forget-password/forget-password.module').then(
+        (m) => m.ForgetPasswordModule
+      ),
   },
   { path: '**', component: NotFoundComponent, title: '404 Page Not Found' },
 ];
