@@ -1,8 +1,8 @@
 <div
-  class="d-flex flex-column flex-shrink-0 bg-dark text-white h-100"
+  class="d-flex flex-column flex-shrink-0 bg-dark text-white h-100 overflow-auto"
   style="width: 4.5rem"
 >
-  <div class="text-center my-4">
+  <!-- <div class="text-center my-4">
     <img
       src="https://github.com/mdo.png"
       alt=""
@@ -10,29 +10,35 @@
       height="50"
       class="rounded-circle me-2"
     />
-  </div>
-  <ul class="nav nav-pills nav-flush flex-column mb-auto text-center fw-semibold">
+  </div> -->
+  <ul class="nav nav-pills flex-column mb-auto text-center fw-semibold text-light">
       <!-- Dashboard -->
       <li>
-        <a routerLink="/" class="nav-link link-light nav-link py-3 border-bottom active fs-5">
+        <a routerLink="/" class="nav-link py-3 border-bottom fs-5"  routerLinkActive="activeLink" [routerLinkActiveOptions]="{exact: true}">
           <i class="fa-solid fa-chart-pie"></i>
         </a>
       </li>
       <!-- Profile -->
       <li>
-        <a routerLink="/profile" class="nav-link link-light nav-link py-3 border-bottom  fs-5">
+        <a routerLink="/profile" class="nav-link py-3 border-bottom fs-5"  routerLinkActive="activeLink">
           <i class="fa-solid fa-user"></i>
         </a>
       </li>
+      <!-- Add Admin -->
+      <li>
+        <a routerLink="/register" class="nav-link py-3 border-bottom fs-5" routerLinkActive="activeLink">
+          <i class="fa-solid fa-user-plus"></i>
+        </a>
+      </li>  
       <!-- Orders -->
       <li>
-        <a routerLink="/orders" class="nav-link link-light nav-link py-3 border-bottom fs-5">
+        <a routerLink="/orders" class="nav-link py-3 border-bottom fs-5"  routerLinkActive="activeLink">
           <i class="fa-solid fa-cart-flatbed"></i>
         </a>
       </li>
       <!-- Categories -->
       <li>
-        <a routerLink="/category" class="nav-link link-light nav-link py-3 border-bottom  fs-5">
+        <a routerLink="/category" class="nav-link py-3 border-bottom fs-5"  routerLinkActive="activeLink">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -49,20 +55,20 @@
       </li>
       <!-- SubCategories -->
       <li>
-        <a routerLink="/subcategory" class="nav-link link-light nav-link py-3 border-bottom  fs-5">
+        <a routerLink="/subcategory" class="nav-link py-3 border-bottom fs-5"  routerLinkActive="activeLink">
           <i class="fa-solid fa-network-wired"></i>
         </a>
       </li>
       <!-- Products -->
       <li>
-        <a routerLink="/product" class="nav-link link-light nav-link py-3   fs-5">
+        <a routerLink="/product" class="nav-link py-3 border-bottom fs-5"  routerLinkActive="activeLink">
           <i class="fa-solid fa-bag-shopping"></i>
         </a>
       </li>
   </ul>
   <div class="text-center fs-5 border-top" (click)="signOut()">
-    <a routerLink="/" class="nav-link link-light nav-link py-3 border-bottom">
-      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+    <a routerLink="/" class="py-3 border-bottom link-underline link-underline-opacity-0 text-danger fw-semibold">
+      <i class="fa-solid fa-arrow-right-from-bracket mt-3"></i>
     </a>
   </div>
   </div>

@@ -32,6 +32,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
 import { OrderCardComponent } from './components/order-card/order-card.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { ProductCardOrderDetailsComponent } from './components/product-card-order-details/product-card-order-details.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ProductCardOrderDetailsComponent } from './components/product-card-orde
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    NgxDropzoneModule,
   ],
   providers: [
     provideClientHydration(),

@@ -1,9 +1,9 @@
 <div
-  class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark border-light h-100"
+  class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark border-light h-100 overflow-auto"
   style="width: 280px"
 >
   <!-- Personal img and title -->
-  <div class="text-center mt-2 mb-4 text-secondary">
+  <!-- <div class="text-center mt-2 mb-4 text-secondary">
     <img
       src="https://github.com/mdo.png"
       alt=""
@@ -13,32 +13,39 @@
     />
     <h4>Edward Sameh</h4>
     <p>CEO</p>
-  </div>
-  <ul class="nav nav-pills flex-column mb-auto fw-semibold">
+  </div> -->
+  <ul class="nav nav-pills flex-column mb-auto fw-semibold text-light">
     <!-- Dashboard -->
     <li>
-      <a routerLink="/" class="nav-link active">
+      <a routerLink="/" class="nav-link" routerLinkActive="activeLink" [routerLinkActiveOptions]="{exact: true}">
         <i class="fa-solid fa-chart-pie"></i>
         <span class="ms-3">Dashboard</span>
       </a>
     </li>
     <!-- Profile -->
     <li>
-      <a routerLink="/profile" class="nav-link link-light">
+      <a routerLink="/profile" class="nav-link" routerLinkActive="activeLink">
         <i class="fa-solid fa-user"></i>
         <span class="ms-3">Profile</span>
       </a>
     </li>
+    <!-- Add Admin -->
+    <li>
+      <a routerLink="/register" class="nav-link" routerLinkActive="activeLink">
+        <i class="fa-solid fa-user-plus"></i>
+        <span class="ms-3">Add Admin</span>
+      </a>
+    </li>
     <!-- Orders -->
     <li>
-      <a routerLink="/orders" class="nav-link link-light">
+      <a routerLink="/orders" class="nav-link" routerLinkActive="activeLink">
         <i class="fa-solid fa-cart-flatbed"></i>
         <span class="ms-3">Manage Orders</span>
       </a>
     </li>
     <!-- Categories -->
     <li>
-      <a routerLink="/category/category" class="nav-link link-light">
+      <a routerLink="/category/category" class="nav-link" routerLinkActive="activeLink">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -56,14 +63,14 @@
     </li>
     <!-- SubCategories -->
     <li>
-      <a routerLink="/subcategory/subcategory" class="nav-link link-light">
+      <a routerLink="/subcategory/subcategory" class="nav-link" routerLinkActive="activeLink">
         <i class="fa-solid fa-network-wired"></i>
         <span class="ms-3">Manage SubCategories</span>
       </a>
     </li>
     <!-- Products -->
     <li>
-      <a routerLink="/product/product" class="nav-link link-light">
+      <a routerLink="/product/product" class="nav-link" routerLinkActive="activeLink">
         <i class="fa-solid fa-bag-shopping"></i>
         <span class="ms-3">Manage Products</span>
       </a>
@@ -71,7 +78,7 @@
   </ul>
   <hr />
   <div class="text-center" (click)="signOut()">
-    <a routerLink="/" class="nav-link active">
+    <a routerLink="/" class="link-underline link-underline-opacity-0 text-danger fw-semibold">
       <span class="me-3">Sign Out</span>
       <i class="fa-solid fa-arrow-right-from-bracket"></i>
     </a>

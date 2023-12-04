@@ -47,7 +47,7 @@ export class UserRequestsService {
   signup(user: IUser): Observable<IUser> {
     return this.httpClient
       .post<IUser>(
-        `${environment.BAseApiURL}/users/signup`,
+        `${environment.BAseApiURL}/admin/register`,
         user,
         this.httpheader
       )
