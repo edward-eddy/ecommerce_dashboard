@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Category } from '../../../models/category';
 import { CategoryService } from '../../../services/category.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-category',
@@ -14,7 +15,8 @@ export class CategoryComponent implements OnInit {
   AllCategories: Category[] = [];
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public categoryServec: CategoryService
+    public categoryServec: CategoryService,
+    public tost: NgToastService
   ) {}
   //======================< Get All Categories >================================================
   ngOnInit(): void {
@@ -49,6 +51,11 @@ export class CategoryComponent implements OnInit {
         this.AllCategories = this.AllCategories.filter(
           (category) => category._id !== categoryId
         );
+        this.tost.success({
+          detail: 'success Message',
+          summary: 'category deleted successfuly',
+          duration: 5000,
+        });
       });
     }
   }

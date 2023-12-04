@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Category } from '../../../models/category';
 import { CategoryService } from '../../../services/category.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-newcategory',
@@ -17,7 +18,8 @@ export class NewcategoryComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     public categoryService: CategoryService,
-    public router: Router
+    public router: Router,
+    public tost: NgToastService
   ) {}
   ngOnInit(): void {
     this.breakpointObserver
@@ -47,7 +49,11 @@ export class NewcategoryComponent implements OnInit {
   //=============< Creat New Category >===================================================
   AddNewCategory() {
     if (!this.files[0]) {
-      alert('upload image first');
+      this.tost.info({
+        detail: 'info Message',
+        summary: 'upload image first',
+        duration: 5000,
+      });
       return;
     }
 
@@ -65,11 +71,21 @@ export class NewcategoryComponent implements OnInit {
         this.category.image = this.image;
         this.categoryService.insertNewCategory(this.category).subscribe({
           next: (data) => {
+            this.tost.success({
+              detail: 'success Message',
+              summary: 'category created successfuly',
+              duration: 5000,
+            });
             // console.log(data);
             this.router.navigate([`/category/category`]);
           },
           error: (err) => {
             console.log(err);
+            this.tost.error({
+              detail: 'Error Message',
+              summary: 'creat faild creat again',
+              duration: 5000,
+            });
           },
         });
       }

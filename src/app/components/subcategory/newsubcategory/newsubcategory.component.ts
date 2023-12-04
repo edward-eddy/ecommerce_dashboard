@@ -5,6 +5,7 @@ import { Category } from '../../../models/category';
 import { Subcategory } from '../../../models/subcategory';
 import { SubcategoryService } from '../../../services/subcategory.service';
 import { CategoryService } from '../../../services/category.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-newsubcategory',
@@ -21,7 +22,8 @@ export class NewsubcategoryComponent {
     private breakpointObserver: BreakpointObserver,
     public subcategoryService: SubcategoryService,
     public categoryService: CategoryService,
-    public router: Router
+    public router: Router,
+    public tost: NgToastService
   ) {
     this.categoryService.getAllCategories().subscribe({
       next: (data) => {
@@ -60,7 +62,11 @@ export class NewsubcategoryComponent {
   //=============< Creat New subCategory >===================================================
   AddNewsubCategory() {
     if (!this.files[0]) {
-      alert('upload image first');
+      this.tost.info({
+        detail: 'info Message',
+        summary: 'upload image first',
+        duration: 5000,
+      });
       return;
     }
 
@@ -81,10 +87,20 @@ export class NewsubcategoryComponent {
           .subscribe({
             next: (data) => {
               console.log(data);
+              this.tost.success({
+                detail: 'success Message',
+                summary: 'subcategory created successfuly',
+                duration: 5000,
+              });
               this.router.navigate(['/subcategory/subcategory']);
             },
             error: (err) => {
               console.log(err);
+              this.tost.error({
+                detail: 'Error Message',
+                summary: 'creat faild creat again',
+                duration: 5000,
+              });
             },
           });
       }

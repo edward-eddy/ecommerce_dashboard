@@ -29,6 +29,7 @@ import {
 } from '@angular/common/http';
 import { adminTokenInterceptor } from './admin-token.interceptor';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    NgToastModule,
   ],
   providers: [
     provideClientHydration(),

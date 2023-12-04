@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Subcategory } from '../../../models/subcategory';
 import { SubcategoryService } from '../../../services/subcategory.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-subcategory',
@@ -14,7 +15,8 @@ export class SubcategoryComponent {
   AllsubCategories: Subcategory[] = [];
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public subCategoryServec: SubcategoryService
+    public subCategoryServec: SubcategoryService,
+    public tost: NgToastService
   ) {}
   //======================< Get All subCategories >================================================
   ngOnInit(): void {
@@ -51,6 +53,11 @@ export class SubcategoryComponent {
         this.AllsubCategories = this.AllsubCategories.filter(
           (subCategory) => subCategory._id !== subCategoryId
         );
+        this.tost.success({
+          detail: 'success Message',
+          summary: 'subcategory deleted successfuly',
+          duration: 5000,
+        });
       });
     }
   }

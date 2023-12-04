@@ -7,6 +7,7 @@ import { CategoryService } from '../../../services/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SubcategoryService } from '../../../services/subcategory.service';
 import { ProductRequestsService } from '../../../services/product-requests.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-editproduct',
@@ -29,7 +30,8 @@ export class EditproductComponent implements OnInit {
     public categoryService: CategoryService,
     public subCategoryService: SubcategoryService,
     private breakpointObserver: BreakpointObserver,
-    public activetedRout: ActivatedRoute
+    public activetedRout: ActivatedRoute,
+    public tost: NgToastService
   ) {
     this.categoryService.getAllCategories().subscribe({
       next: (data) => {
@@ -153,10 +155,20 @@ export class EditproductComponent implements OnInit {
       .subscribe({
         next: (data) => {
           // console.log(data);
+          this.tost.success({
+            detail: 'success Message',
+            summary: 'product updated successfuly',
+            duration: 5000,
+          });
           this.router.navigate([`/product/product`]);
         },
         error: (err) => {
           console.log(err);
+          this.tost.error({
+            detail: 'Error Message',
+            summary: 'update faild update again',
+            duration: 5000,
+          });
         },
       });
   }

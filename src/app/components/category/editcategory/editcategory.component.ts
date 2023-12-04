@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../../../models/category';
 import { CategoryService } from '../../../services/category.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-editcategory',
@@ -20,7 +21,8 @@ export class EditcategoryComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     public categoryService: CategoryService,
     public router: Router,
-    public activetedRout: ActivatedRoute
+    public activetedRout: ActivatedRoute,
+    public tost: NgToastService
   ) {}
   ngOnInit(): void {
     this.breakpointObserver
@@ -83,10 +85,20 @@ export class EditcategoryComponent implements OnInit {
             .subscribe({
               next: (data) => {
                 // console.log(data);
+                this.tost.success({
+                  detail: 'success Message',
+                  summary: 'category updated successfuly',
+                  duration: 5000,
+                });
                 this.router.navigate([`/category/category`]);
               },
               error: (err) => {
                 console.log(err);
+                this.tost.error({
+                  detail: 'Error Message',
+                  summary: 'update faild update again',
+                  duration: 5000,
+                });
               },
             });
         }
@@ -98,10 +110,20 @@ export class EditcategoryComponent implements OnInit {
       .subscribe({
         next: (data) => {
           // console.log(data);
+          this.tost.success({
+            detail: 'success Message',
+            summary: 'category updated successfuly',
+            duration: 5000,
+          });
           this.router.navigate([`/category/category`]);
         },
         error: (err) => {
           console.log(err);
+          this.tost.error({
+            detail: 'Error Message',
+            summary: 'update faild update again',
+            duration: 5000,
+          });
         },
       });
   }

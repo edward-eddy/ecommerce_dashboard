@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { NgToastModule } from 'ng-angular-popup';
 
 const routes: Routes = [
   {
@@ -45,6 +46,7 @@ const routes: Routes = [
     FlexLayoutModule,
     FormsModule,
     NgxDropzoneModule,
+    NgToastModule,
   ],
 })
 export class ProductModule {}

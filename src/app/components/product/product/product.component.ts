@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Products } from '../../../models/products';
 import { ProductRequestsService } from '../../../services/product-requests.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-product',
@@ -17,7 +18,8 @@ export class ProductComponent implements OnInit {
   pageSize = 8;
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public productService: ProductRequestsService
+    public productService: ProductRequestsService,
+    public tost: NgToastService
   ) {}
   ngOnInit(): void {
     this.breakpointObserver
@@ -50,6 +52,11 @@ export class ProductComponent implements OnInit {
         this.AllProducts = this.AllProducts.filter(
           (product) => product._id !== productId
         );
+        this.tost.success({
+          detail: 'success Message',
+          summary: 'product deleted successfuly',
+          duration: 5000,
+        });
       });
     }
   }
