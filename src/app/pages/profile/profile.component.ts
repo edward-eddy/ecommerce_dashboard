@@ -3,6 +3,7 @@ import { IUser } from '../../models/iuser';
 import * as jwt_decode from "jwt-decode";
 import { UserRequestsService } from '../../services/user-requests.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AdminAuthService } from '../../services/admin-auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -27,9 +28,9 @@ export class ProfileComponent {
 
   repeatPassword : string = ""
 
-  constructor(public userService : UserRequestsService , private router : Router  ,private route: ActivatedRoute){}
+  constructor(public userService : UserRequestsService , private router : Router  ,private route: ActivatedRoute, private adminAuth: AdminAuthService){}
   ngOnInit():void{
-    let localS = localStorage.getItem("token")
+    let localS = this.adminAuth.getToken()
     console.log(localS);
     this.id = this.getDecodedAccessToken(localS).id
     this.userService.getOneUser(this.id).subscribe({
@@ -107,7 +108,7 @@ export class ProfileComponent {
 
   checkCurrnetPassword(){
     this.passwordCheckingFlag = !this.passwordCheckingFlag
-    this.userService.login({"email" : this.user.email , "password" : this.userPassword }).subscribe({
+    this.adminAuth.login(this.user.email ,this.userPassword).subscribe({
       next: (data) => {
         console.log(data);
         this.passwordCheckingFlag = !this.passwordCheckingFlag
