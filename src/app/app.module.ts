@@ -29,6 +29,9 @@ import {
 } from '@angular/common/http';
 import { adminTokenInterceptor } from './admin-token.interceptor';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { OrderCardComponent } from './components/order-card/order-card.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { ProductCardOrderDetailsComponent } from './components/product-card-order-details/product-card-order-details.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,9 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     MobileSideNavComponent,
     GroupOfRoutesComponent,
     ResetPasswordComponent,
+    OrderCardComponent,
+    OrderDetailsComponent,
+    ProductCardOrderDetailsComponent,
   ],
   imports: [
     BrowserModule,
