@@ -101,24 +101,27 @@
           {{ product?.title }}
         </h3>
       </div>
-      <div class="mb-2">
-        <i class="fa-solid fa-calculator me-3"></i>{{ product?.quantity }}
-      </div>
-      <div
-        class="d-flex flex-column justify-content-center align-items-center mb-2"
-      >
-        <div><i class="fa-solid fa-tag me-3"></i>{{ product?.price }}</div>
-      </div>
-      <div class="d-flex justify-content-center align-items-center mb-2">
-        <div class="me-2"><i class="fa-solid fa-percent"></i></div>
-        <div>{{ product?.priceAfterDescount }}</div>
-      </div>
-      <div class="d-flex justify-content-center align-items-center mb-2">
-        <i class="fa-solid fa-network-wired me-3"></i>{{ product?.subcategory }}
-      </div>
+      <div class="d-flex justify-content-around align-items-center">
+        <div class="mb-2">
+          <i class="fa-solid fa-calculator me-3"></i>{{ product?.quantity }}
+        </div>
+        <div
+          class="d-flex flex-column justify-content-center align-items-center mb-2"
+        >
+          <div><i class="fa-solid fa-tag me-3"></i>{{ product?.price }}</div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center mb-2">
+          <div class="me-2"><i class="fa-solid fa-percent"></i></div>
+          <div>{{ product?.priceAfterDescount }}</div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center mb-2">
+          <i class="fa-solid fa-network-wired me-3"></i
+          >{{ product?.subcategory }}
+        </div>
 
-      <div class="mb-2">
-        <i class="fa-solid fa-chart-simple me-3"></i>{{ product?.category }}
+        <div class="mb-2">
+          <i class="fa-solid fa-chart-simple me-3"></i>{{ product?.category }}
+        </div>
       </div>
       <div class="d-flex justify-content-center align-items-center">
         <p class="text-center w-75">

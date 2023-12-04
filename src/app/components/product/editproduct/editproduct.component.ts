@@ -102,35 +102,32 @@ export class EditproductComponent implements OnInit {
   //==========< update Product >===============================================
   updateProduct() {
     if (!this.file[0] || this.files.length <= 4) {
-      this.productsService
-        .updateProduct(this.currentproduct, this.product)
-        .subscribe({
-          next: (data) => {
-            // console.log(data);
-            this.router.navigate([`/product/product`]);
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
+      this.updateProductAndNavigate();
     }
 
-    const thumbnailFormData = new FormData();
-    thumbnailFormData.append('file', this.file[0]);
-    thumbnailFormData.append('upload_preset', 'angular-cloudinary');
-    thumbnailFormData.append('cloud_name', 'doksixv16');
+    if (this.file[0]) {
+      const thumbnailFormData = new FormData();
+      thumbnailFormData.append('file', this.file[0]);
+      thumbnailFormData.append('upload_preset', 'angular-cloudinary');
+      thumbnailFormData.append('cloud_name', 'doksixv16');
 
-    this.productsService
-      .uploadImage(thumbnailFormData)
-      .subscribe((thumbnailRes) => {
-        if (thumbnailRes) {
-          // console.log('cover image', thumbnailRes);
-          this.thumbnailUrl = thumbnailRes.secure_url;
-          this.product.thumbnail = this.thumbnailUrl;
-          this.uploadImagesSequentially(0);
-        }
-      });
+      this.productsService
+        .uploadImage(thumbnailFormData)
+        .subscribe((thumbnailRes) => {
+          if (thumbnailRes) {
+            console.log('cover image', thumbnailRes);
+            this.thumbnailUrl = thumbnailRes.secure_url;
+            this.product.thumbnail = this.thumbnailUrl;
+            console.log(this.product.thumbnail);
+            this.updateProductAndNavigate();
+          }
+        });
+    }
+    if (this.files.length <= 4) {
+      this.uploadImagesSequentially(0);
+    }
   }
+
   uploadImagesSequentially(index: number) {
     if (index < this.files.length) {
       const imageFormData = new FormData();
@@ -143,8 +140,14 @@ export class EditproductComponent implements OnInit {
         // console.log('imgs', this.imageUrls);
         this.uploadImagesSequentially(index + 1);
         this.product.images = this.imageUrls;
+        if (index === this.files.length - 1) {
+          this.updateProductAndNavigate();
+        }
       });
     }
+  }
+
+  updateProductAndNavigate() {
     this.productsService
       .updateProduct(this.currentproduct, this.product)
       .subscribe({

@@ -77,7 +77,7 @@ export class ProductComponent implements OnInit {
   }
   //===================< next & previes >==================================================
   nextPage() {
-    if (this.currentPage < 5) {
+    if (this.currentPage < 4) {
       this.currentPage++;
       this.getAllProducts(this.currentPage);
     } else {
