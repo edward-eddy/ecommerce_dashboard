@@ -65,7 +65,7 @@
             <input
               class="form-check-input"
               type="checkbox"
-              value=""
+              (change)="logCheck($event)"
               id="rememberMe"
             />
             <label class="form-check-label" for="rememberMe">
@@ -79,12 +79,6 @@
           </div>
           <div class="col-12 my-4">
             <input type="submit" value="Log in" class="loginInput" />
-          </div>
-          <div class="col-12">
-            <p class="lead fs-6 d-inline-block">Don't have an account?</p>
-            <a routerLink="/user/auth/register" class="authChangeBtn">
-              Register now
-            </a>
           </div>
         </div>
       </form>

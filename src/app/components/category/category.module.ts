@@ -7,6 +7,8 @@ import { CategoryComponent } from './category/category.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
 const routes: Routes = [
   {
     path: `category`,
@@ -42,6 +44,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FlexLayoutModule,
     FormsModule,
+    NgxDropzoneModule,
   ],
 })
 export class CategoryModule {}

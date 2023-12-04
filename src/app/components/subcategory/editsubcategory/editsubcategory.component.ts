@@ -13,6 +13,7 @@ import { CategoryService } from '../../../services/category.service';
 })
 export class EditsubcategoryComponent implements OnInit {
   AllCategories: Category[] = [];
+  image: string = '';
   subCategory: Subcategory = {} as Subcategory;
   isSmallScreen: boolean = false;
   flagNav: boolean = true;
@@ -34,6 +35,7 @@ export class EditsubcategoryComponent implements OnInit {
       },
     });
   }
+  //==========================< current subcategory >==========================================
   ngOnInit(): void {
     this.breakpointObserver
       .observe('(min-width: 939px)')
@@ -42,12 +44,12 @@ export class EditsubcategoryComponent implements OnInit {
       });
     this.activetedRout.paramMap.subscribe((paramMap) => {
       this.currentSubCategory = paramMap.get(`id`);
-      console.log(this.currentSubCategory);
+      // console.log(this.currentSubCategory);
       this.subcategoryService
         .getSubCategoryById(this.currentSubCategory)
         .subscribe((data) => {
           if (data) {
-            console.log(data);
+            // console.log(data);
             this.subCategory = (data as any).data || [];
           } else {
             alert('this category is not found');
@@ -56,17 +58,58 @@ export class EditsubcategoryComponent implements OnInit {
         });
     });
   }
+  //============================< image upload >================================================
+
+  files: File[] = [];
+
+  onSelect(event) {
+    // console.log(event);
+    this.files.push(...event.addedFiles);
+    // console.log(this.files[0]);
+  }
+
+  onRemove(event) {
+    // console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+  }
   //=============< toggle nave >==========================================================
   toggleNav() {
     this.flagNav = !this.flagNav;
   }
   //=============< update New subCategory >===================================================
   updatesubCategory() {
+    if (this.files[0]) {
+      const file_data = this.files[0];
+      const data = new FormData();
+      data.append('file', file_data);
+      data.append('upload_preset', 'angular-cloudinary');
+      data.append('cloud_name', 'doksixv16');
+
+      this.subcategoryService.uploadImage(data).subscribe((res) => {
+        if (res) {
+          // console.log(res);
+          this.image = res.secure_url;
+          // console.log('image', this.image);
+          this.subCategory.image = this.image;
+          this.subcategoryService
+            .updateSubCtegory(this.currentSubCategory, this.subCategory)
+            .subscribe({
+              next: (data) => {
+                // console.log(data);
+                this.router.navigate([`/subcategory/subcategory`]);
+              },
+              error: (err) => {
+                console.log(err);
+              },
+            });
+        }
+      });
+    }
     this.subcategoryService
       .updateSubCtegory(this.currentSubCategory, this.subCategory)
       .subscribe({
         next: (data) => {
-          console.log(data);
+          // console.log(data);
           this.router.navigate([`/subcategory/subcategory`]);
         },
         error: (err) => {

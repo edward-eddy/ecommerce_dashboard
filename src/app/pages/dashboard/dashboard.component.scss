@@ -3,7 +3,9 @@
   min-width: 160px;
   // margin: 0 1rem 0 0;
 }
-
+.smallCards{
+  width: 70svw;
+}
 .circle {
   border-radius: 2.375rem;
   width: 2em;
@@ -31,11 +33,14 @@
 }
 
 @media only screen and (min-width: 10px) and (max-width: 768px) {
-  .leftSection table.table {
-    width: 75%;
-    tr {
-      display: flex;
-      flex-direction: column;
-    }
+  // .leftSection table.table {
+    // width: 75%;
+    // tr {
+      // display: flex;
+      // flex-direction: column;
+    // }
+  // }
+  .leftSection{
+    width: fit-content;
   }
 }

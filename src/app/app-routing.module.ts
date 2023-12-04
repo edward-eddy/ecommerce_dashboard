@@ -11,6 +11,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 const routes: Routes = [
@@ -24,14 +25,8 @@ const routes: Routes = [
       { path: 'orders/:id', component: OrderDetailsComponent, title: 'Orders details Page' },
 
       { path: 'register', component: RegisterComponent, title: 'Register' },
-      { path: 'product', component: ProductsComponent, title: 'Product Page' },
+      // { path: 'product', component: ProductsComponent, title: 'Product Page' },
       { path: 'profile', component: ProfileComponent, title: 'Admin Profile' },
-      // {
-      //   path: 'category',
-      //   component: CategoryComponent,
-      //   title: 'Category Page',
-      // },
-      // {path:"subcategory", component:SubcategoryComponent, title:"Subcategory Page"},
       {
         path: 'subcategory',
         loadChildren: () =>
@@ -46,6 +41,13 @@ const routes: Routes = [
             (m) => m.CategoryModule
           ),
       },
+      {
+        path: 'product',
+        loadChildren: () =>
+          import('./components/product/product.module').then(
+            (m) => m.ProductModule
+          ),
+      },
     ],
   },
   {
@@ -54,6 +56,7 @@ const routes: Routes = [
     canActivate: [adminLoginGuard],
     title: 'Login',
   },
+  {path: "resetPassword", component: ResetPasswordComponent, title: "Password Reset"},
   { path: '**', component: NotFoundComponent, title: '404 Page Not Found' },
 ];
 

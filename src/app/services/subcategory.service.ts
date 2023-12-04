@@ -31,6 +31,14 @@ export class SubcategoryService {
     var subcategory = `${environment.BAseApiURL}/subCategories/${_id}`;
     return this.httpClient.delete(subcategory);
   }
+  //===================< upload imag >============================================================
+  uploadImage(vals): Observable<any> {
+    let data = vals;
+    return this.httpClient.post(
+      'https://api.cloudinary.com/v1_1/doksixv16/image/upload',
+      data
+    );
+  }
   //================< Creat New subCategory >==================================================
   insertNewSubCategory(Subcategory: Subcategory): Observable<Subcategory> {
     return this.httpClient

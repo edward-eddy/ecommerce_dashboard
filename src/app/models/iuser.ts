@@ -7,5 +7,4 @@ export interface IUser {
     role?:string;
     createdAt?: Date;
     updatedAt?: Date;
-
 }

@@ -22,13 +22,17 @@ import { MobileSideNavComponent } from './components/mobile-side-nav/mobile-side
 import { GroupOfRoutesComponent } from './components/group-of-routes/group-of-routes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
+  HTTP_INTERCEPTORS,
   HttpClientModule,
   provideHttpClient,
   withFetch,
 } from '@angular/common/http';
+import { adminTokenInterceptor } from './admin-token.interceptor';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { OrderCardComponent } from './components/order-card/order-card.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { ProductCardOrderDetailsComponent } from './components/product-card-order-details/product-card-order-details.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -47,6 +51,7 @@ import { ProductCardOrderDetailsComponent } from './components/product-card-orde
     SideNavComponent,
     MobileSideNavComponent,
     GroupOfRoutesComponent,
+    ResetPasswordComponent,
     OrderCardComponent,
     OrderDetailsComponent,
     ProductCardOrderDetailsComponent,
@@ -57,8 +62,17 @@ import { ProductCardOrderDetailsComponent } from './components/product-card-orde
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    NgxDropzoneModule,
   ],
-  providers: [provideClientHydration(), provideHttpClient(withFetch())],
+  providers: [
+    provideClientHydration(),
+    provideHttpClient(withFetch()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: adminTokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -29,12 +29,7 @@ export class RegisterComponent {
       email : ['' , [Validators.required , Validators.email , Validators.pattern(this.emailRegx)]],
       password : ['' , [Validators.required , Validators.minLength(6) , Validators.pattern(this.passwordRegx)]],
       role : ['admin' , [Validators.required ]],
-
-
     })
-    // if(!userService.isUserLogged){
-    //   router.navigate(['/'])
-    // }
   }
 
   get name(){
@@ -50,18 +45,39 @@ export class RegisterComponent {
   signUpFunc(){
     this.userService.signup(this.userRegisterForm.value).subscribe({
       next :(data) =>{
-        console.log(data);
-        this.router.navigate(["/login"])
-
+        let temp = JSON.parse(JSON.stringify(data))
+        alert(temp.message)
+        location.reload();
+        this.router.navigate(["/register"])
       },
       error(err) {
-        console.log(err);
-
+        // console.log(err);
       },
     })
   }
 
+//============================< image upload >================================================
 
+file: File[] = [];
+files: File[] = [];
+
+onSelectThumbnail(event) {
+  // console.log(event);
+  this.file.push(...event.addedFiles);
+  // console.log(this.file[0]);
+}
+onSelectImage(event) {
+  this.files.push(...event.addedFiles);
+  const selectedFile = event.addedFiles[0];
+  console.log(this.files.slice(0 - 4));
+}
+onRemove(event) {
+  // console.log(event);
+  this.file.splice(this.file.indexOf(event), 1);
+}
+onRemoveImges(event) {
+  this.files.splice(this.file.indexOf(event), 1);
+}
 
   moveToLogin(){
     this.router.navigate(["/login"])

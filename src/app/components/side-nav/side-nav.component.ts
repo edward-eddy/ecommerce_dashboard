@@ -1,3 +1,4 @@
+import { AdminAuthService } from './../../services/admin-auth.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './side-nav.component.scss'
 })
 export class SideNavComponent {
+  constructor(private adminAuth:AdminAuthService){}
 
+  signOut(){
+    this.adminAuth.logout()
+  }
 }
