@@ -10,8 +10,6 @@ export const adminLoginGuard: CanActivateFn = (route, state) => {
 
   // if (!userService.isUserLogged){
   if (!adminAuth.isUserLogged){
-    console.log("adminLoginGuard");
-
     return true
   } else {
     router.navigate(['/'])

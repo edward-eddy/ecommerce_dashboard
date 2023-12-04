@@ -12,7 +12,6 @@ import { AdminAuthService } from './services/admin-auth.service';
 export class adminTokenInterceptor implements HttpInterceptor {
   constructor(private adminAuth: AdminAuthService){}
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    console.log(req.url);
     if ( req.url === "https://api.cloudinary.com/v1_1/doksixv16/image/upload"){
       return next.handle(req)
     }
@@ -33,8 +32,6 @@ export class adminTokenInterceptor implements HttpInterceptor {
         }
       },
       (error) => {
-        console.log("=================>", error.error.message);
-
         if (error.status === 401 && error.error.message === "Invalid token, logOut")
         this.adminAuth.logout()
       })
