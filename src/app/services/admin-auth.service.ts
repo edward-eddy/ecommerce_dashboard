@@ -67,8 +67,6 @@ export class AdminAuthService {
 
   getToken() {
     const sessionToken = sessionStorage.getItem('token');
-    // console.log(sessionToken);
-
     let cookies = document.cookie.split(/[;=]/);
     let cookiesToken =
       cookies.indexOf('token') !== -1
