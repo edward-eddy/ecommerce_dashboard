@@ -23,16 +23,24 @@ export class CategoryService {
     );
   }
   //=================< Delete category >======================================================
-  deletCategory(_id: string | undefined) {
+  deletCategory(_id: string | undefined, token: string | null) {
+    // console.log(token);
     var category = `${environment.BAseApiURL}/categories/${_id}`;
     const headers = {
-      headers: {
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWQxZDI1ZWQ3NGQ1NDhmM2U1YzQ4YSIsImlhdCI6MTcwMTAwMjkwM30.mLpvILQ8z9tdF-4IzlInNmhyDrW68L2pxGbIqZ7SkfQ',
+      headers: new HttpHeaders({
+        Authorization: token ? token : '',
         'Content-Type': 'application/json',
-      },
+      }),
     };
     return this.httpClient.delete(category, headers);
+  }
+  //===================< upload imag >============================================================
+  uploadImage(vals): Observable<any> {
+    let data = vals;
+    return this.httpClient.post(
+      'https://api.cloudinary.com/v1_1/doksixv16/image/upload',
+      data
+    );
   }
   //================< Creat New Category >==================================================
   insertNewCategory(category: Category): Observable<Category> {

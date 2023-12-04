@@ -92,19 +92,21 @@
     class="container d-flex justify-content-around align-items-center content"
   >
     <div class="mb-4 mt-4">
-      <img class="img-fluid" [src]="subcategory?.image" alt="" />
+      <img class="img-fluid" [src]="subcategory.image" alt="" />
     </div>
     <div class="d-flex flex-column justify-content-center align-items-center">
-      <h3>{{ subcategory?.name }}</h3>
+      <h3>{{ subcategory.name }}</h3>
+      <h3>{{ subcategory.parentCategory }}</h3>
       <div
         class="d-flex flex-column justify-content-center align-items-center mb-2"
       >
         <div>
           <i class="fa-solid fa-circle-plus me-3"></i
-          >{{ subcategory?.createdAt }}
+          >{{ subcategory.createdAt | date : "shortDate" }}
         </div>
         <div>
-          <i class="fa-solid fa-wrench me-3"></i>{{ subcategory?.updatedAt }}
+          <i class="fa-solid fa-wrench me-3"></i
+          >{{ subcategory.updatedAt | date : "shortDate" }}
         </div>
       </div>
     </div>

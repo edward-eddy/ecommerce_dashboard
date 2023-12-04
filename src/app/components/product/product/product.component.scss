@@ -21,12 +21,12 @@
   color: white;
   border: none;
 }
-.categories {
+.product {
   background-color: #19191a;
 }
-// .title-p {
-//   width: 140px;
-// }
+.title-p {
+  width: 170px;
+}
 i {
   color: #2fe5a7;
 }
@@ -50,11 +50,22 @@ i {
   border-radius: 50%;
   background-color: #ff69b43e;
 }
-.all-category,
+.all-product,
+.review,
 .details,
 .icon,
 .icon2 {
   cursor: pointer;
+}
+.Next {
+  background-color: #ff69b43e;
+  border: none;
+  color: #ff69b4;
+}
+.Previous {
+  background-color: #2fe5a843;
+  border: none;
+  color: #2fe5a7;
 }
 //===========< media query >=======================
 //===========< nav media >==========================
@@ -77,36 +88,55 @@ i {
     display: block !important;
   }
 }
-.all-product {
-  cursor: pointer;
-}
 //===========< product media >======================
-@media only screen and (max-width: 1063px) {
+@media only screen and (max-width: 1141px) {
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+  }
+}
+@media only screen and (max-width: 953px) {
+  .edit-delet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+}
+@media only screen and (max-width: 840px) {
+  .image-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 530px) {
+  .edit-delet {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
   .content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin: 10px 0;
+    justify-content: center;
+    text-align: center;
   }
-}
-@media only screen and (max-width: 665px) {
-  .category {
+  .product {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-  }
-}
-@media only screen and (max-width: 337px) {
-  .hide-on-small3 {
-    display: none !important;
-  }
-
-  .show-on-small3 {
-    display: block !important;
-  }
-  .icon {
-    margin-right: 10px !important;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
   }
 }

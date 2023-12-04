@@ -91,82 +91,87 @@
   <!-- nav end -->
   <!-- new category layout -->
   <div class="content">
-    <form (ngSubmit)="updatesubCategory()" #addProduct="ngForm">
+    <form (ngSubmit)="updatesubCategory()" #addSubcategory="ngForm">
       <div
         class="d-flex justify-content-around align-items-center new-category"
       >
-        <div class="mb-3 mt-3">
-          <label>img url:</label>
-          <input
-            placeholder="Enter Product image (required)"
-            class="form-control"
-            type="text"
-            [(ngModel)]="subCategory.image"
-            name="images"
-            required
-            #productimage="ngModel"
-            [ngClass]="{
-              'is-invalid':
-                (productimage.touched || productimage.dirty) &&
-                productimage.invalid
-            }"
-          />
-          <span class="invalid-feedback">
-            <span *ngIf="productimage.errors?.['required']"
-              >product image is required
-            </span>
-          </span>
+        <div
+          class="w-50 d-flex justify-content-around align-items-center imgs-content"
+        >
+          <div class="mb-3 mt-3">
+            <h4>Current Image</h4>
+            <div class="img-div">
+              <img class="current-img" [src]="subCategory.image" alt="" />
+            </div>
+          </div>
+          <div class="mb-3 mt-3">
+            <h4>Updated Image</h4>
+            <ngx-dropzone (change)="onSelect($event)">
+              <ngx-dropzone-label
+                ><i class="fa-solid fa-camera-retro fs-3 camera"></i
+              ></ngx-dropzone-label>
+              <ngx-dropzone-image-preview
+                class="selected-image-container"
+                ngProjectAs="ngx-dropzone-preview"
+                *ngFor="let f of files"
+                [file]="f"
+                [removable]="true"
+                (removed)="onRemove(f)"
+              >
+              </ngx-dropzone-image-preview>
+            </ngx-dropzone>
+          </div>
         </div>
         <div>
           <div class="mb-3 mt-3">
             <label>name: </label>
             <input
               class="form-control"
-              placeholder="Enter Product Name (required)"
+              placeholder="subcategory Name (required)"
               type="text"
               [(ngModel)]="subCategory.name"
-              name="title"
+              name="name"
               required
               minlength="4"
-              #productName="ngModel"
+              #subcategoryName="ngModel"
               [ngClass]="{
                 'is-invalid':
-                  (productName.touched || productName.dirty) &&
-                  productName.invalid
+                  (subcategoryName.touched || subcategoryName.dirty) &&
+                  subcategoryName.invalid
               }"
             />
             <span class="invalid-feedback">
-              <span *ngIf="productName.errors?.['required']"
-                >product name is required
+              <span *ngIf="subcategoryName.errors?.['required']"
+                >subcategory name is required
               </span>
-              <span *ngIf="productName.errors?.['minlength']"
-                >product name must be at least 4 characters
+              <span *ngIf="subcategoryName.errors?.['minlength']"
+                >subCategory name must be at least 4 characters
               </span>
             </span>
           </div>
           <div class="mb-3 mt-3">
-            <label>title_ar:</label>
+            <label>name_ar:</label>
             <input
               class="form-control"
-              placeholder="Enter Product Name (required)"
+              placeholder="subCategory Name Ar (required)"
               type="text"
               [(ngModel)]="subCategory.name_ar"
-              name="title_ar"
+              name="name_ar"
               required
               minlength="4"
-              #productName="ngModel"
+              #subcategoryName_ar="ngModel"
               [ngClass]="{
                 'is-invalid':
-                  (productName.touched || productName.dirty) &&
-                  productName.invalid
+                  (subcategoryName_ar.touched || subcategoryName_ar.dirty) &&
+                  subcategoryName_ar.invalid
               }"
             />
             <span class="invalid-feedback">
-              <span *ngIf="productName.errors?.['required']"
-                >product name is required
+              <span *ngIf="subcategoryName_ar.errors?.['required']"
+                >subcategoty name_ar is required
               </span>
-              <span *ngIf="productName.errors?.['minlength']"
-                >product name must be at least 4 characters
+              <span *ngIf="subcategoryName_ar.errors?.['minlength']"
+                >subcategoty name_ar must be at least 4 characters
               </span>
             </span>
           </div>
@@ -177,11 +182,11 @@
               [(ngModel)]="subCategory.parentCategory"
               name="category"
               required
-              #productcategory="ngModel"
+              #subcategoryCategory="ngModel"
               [ngClass]="{
                 'is-invalid':
-                  (productcategory.touched || productcategory.dirty) &&
-                  productcategory.invalid
+                  (subcategoryCategory.touched || subcategoryCategory.dirty) &&
+                  subcategoryCategory.invalid
               }"
             >
               <option
@@ -192,8 +197,8 @@
               </option>
             </select>
             <span class="invalid-feedback">
-              <span *ngIf="productcategory.errors?.['required']"
-                >product category is required
+              <span *ngIf="subcategoryCategory.errors?.['required']"
+                >subcategory parentcategory is required
               </span>
             </span>
           </div>
@@ -203,7 +208,7 @@
         <button
           type="submit"
           class="btn creat mt-3 mb-3"
-          [disabled]="addProduct.invalid"
+          [disabled]="addSubcategory.invalid"
         >
           Update subCategory
         </button>

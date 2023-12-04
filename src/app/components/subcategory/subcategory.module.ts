@@ -7,6 +7,7 @@ import { NewsubcategoryComponent } from './newsubcategory/newsubcategory.compone
 import { EditsubcategoryComponent } from './editsubcategory/editsubcategory.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 const routes: Routes = [
   {
@@ -43,6 +44,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FlexLayoutModule,
     FormsModule,
+    NgxDropzoneModule,
   ],
 })
 export class SubcategoryModule {}

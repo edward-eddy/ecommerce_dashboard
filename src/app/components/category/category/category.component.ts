@@ -27,10 +27,7 @@ export class CategoryComponent implements OnInit {
     this.categoryServec.getAllCategories().subscribe({
       next: (response) => {
         this.AllCategories = (response as any).data || [];
-        console.log(this.AllCategories);
-        this.AllCategories.forEach((category) => {
-          return category.createdAt, category.updatedAt;
-        });
+        // console.log(this.AllCategories);
       },
       error: (err) => {
         console.log(err);
@@ -47,7 +44,8 @@ export class CategoryComponent implements OnInit {
       'Are you sure you want to delete this category?'
     );
     if (confirmDelete) {
-      this.categoryServec.deletCategory(categoryId).subscribe(() => {
+      const token = localStorage.getItem('token');
+      this.categoryServec.deletCategory(categoryId, token).subscribe(() => {
         this.AllCategories = this.AllCategories.filter(
           (category) => category._id !== categoryId
         );
@@ -59,7 +57,7 @@ export class CategoryComponent implements OnInit {
     this.categoryServec.getAllCategories().subscribe({
       next: (response) => {
         this.AllCategories = (response as any).data || [];
-        console.log(this.AllCategories);
+        // console.log(this.AllCategories);
       },
       error: (err) => {
         console.log(err);
@@ -68,10 +66,10 @@ export class CategoryComponent implements OnInit {
   }
   //========================< search by name >==================================================
   nameSearch(filtervalue: string): Category[] {
-    filtervalue = filtervalue.toLocaleLowerCase();
+    filtervalue = filtervalue.toLowerCase();
 
     var filteredCategories = this.AllCategories.filter((category: Category) => {
-      return category.name.toLocaleLowerCase().includes(filtervalue);
+      return category.name.toLowerCase().includes(filtervalue);
     });
 
     return (this.AllCategories = filteredCategories);

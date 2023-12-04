@@ -22,7 +22,7 @@ const routes: Routes = [
       { path: '', component: DashboardComponent, title: 'Admin Dashboard' },
       { path: 'orders', component: OrdersComponent, title: 'Orders Page' },
       { path: 'register', component: RegisterComponent, title: 'Register' },
-      { path: 'product', component: ProductsComponent, title: 'Product Page' },
+      // { path: 'product', component: ProductsComponent, title: 'Product Page' },
       { path: 'profile', component: ProfileComponent, title: 'Admin Profile' },
       {
         path: 'subcategory',
@@ -36,6 +36,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./components/category/category.module').then(
             (m) => m.CategoryModule
+          ),
+      },
+      {
+        path: 'product',
+        loadChildren: () =>
+          import('./components/product/product.module').then(
+            (m) => m.ProductModule
           ),
       },
     ],
