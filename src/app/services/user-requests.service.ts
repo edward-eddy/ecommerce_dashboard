@@ -85,7 +85,16 @@ export class UserRequestsService {
       )
     }
 
+    getOneUser(id : string):Observable<IUser>{
+      return this.httpClient.get<IUser>(`${environment.BAseApiURL}/users/${id}`);
+    }
 
+    editOneUser(id : string , updates ):Observable<IUser>{
+      console.log(updates);
+      
+      return this.httpClient.put<IUser>(`${environment.BAseApiURL}/users/${id}` , updates);
+
+    }
 
 
 }

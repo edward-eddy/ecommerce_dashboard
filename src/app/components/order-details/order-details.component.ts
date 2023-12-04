@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderRequestsService } from '../../services/order-requests.service';
 import { IOrders } from '../../models/iorders';
+import { IPrdsQun } from '../../models/iPrdQun';
 
 @Component({
   selector: 'app-order-details',
@@ -14,8 +15,8 @@ export class OrderDetailsComponent {
   order : IOrders
   statusEdited : boolean = false
   status : string 
-  constructor(private route: ActivatedRoute ,private orderService : OrderRequestsService , private router : Router){
-  }
+  itemsIds : IPrdsQun[]
+  constructor(private route: ActivatedRoute ,private orderService : OrderRequestsService , private router : Router){}
   ngOnInit() {
 
     const routeParams = this.route.snapshot.paramMap;
@@ -27,6 +28,8 @@ export class OrderDetailsComponent {
         this.status = this.order.status
         this.date = new Date(this.order.createdAt)
         this.postDate = this.date.toLocaleDateString('en-US' , { year: 'numeric', month: 'long', day: 'numeric' })
+        this.fillItemsIds()
+        
              
       },
       error(err) {
@@ -36,10 +39,19 @@ export class OrderDetailsComponent {
     })
     
   }
+  fillItemsIds(){
+    this.itemsIds = []
+    for(let i = 0 ; i < this.order.items.length ; i++){
+      this.itemsIds.push({"id":this.order.items[i]._id ,"quantity" :this.order.items[i].quantity })
+    }
+    console.log(this.itemsIds);
+    
+    
+  }
   toggleStatus(status: string) {
     console.log(status);
     
-    this.orderService.toggleStatus(this.order?._id, status).subscribe({
+    this.orderService.toggleStatus(this.order._id, status , this.order.paymentStatus).subscribe({
       next:(data)=>{
         console.log(data);
         this.statusEdited = !this.statusEdited
@@ -64,5 +76,23 @@ export class OrderDetailsComponent {
     this.statusEdited = !this.statusEdited
     
   }
-  
+  cancelOrder(){
+    this.orderService.cancelOrder(this.order?._id , this.order?.paymentStatus  ).subscribe({
+      next:(data)=>{
+        console.log(data);
+        this.ngOnInit()
+        this.orderCancelPrds()
+      },
+      error(err) {
+        console.log(err);
+        
+      }
+    })
+  }
+  orderCancelPrds(){
+    for(let i = 0 ; i < this.itemsIds.length ; i++){
+      this.orderService.orderCanceledPrds(this.itemsIds[i].id , this.itemsIds[i].quantity)
+    }
+  }
+
 }

@@ -47,20 +47,24 @@
                         {{status}}
                     </span>
                 </p>
-                <button class="btn btn-success btn-sm" *ngIf="statusEdited" (click)="toggleStatus(status)">
-                    save
-                </button>
-                <button class="btn btn-sm" [ngClass]="{'btn-outline-light' :!statusEdited ,'btn-outline-danger' :statusEdited   }" (click)="editStatus()">
-                    <ng-container *ngIf="!statusEdited">
-                        <i class="fa-regular fa-pen-to-square"></i>
-                    </ng-container>
-                    <ng-container *ngIf="statusEdited">
-                        <i class="fa-solid fa-xmark"></i>                    
-                    </ng-container>
-                </button>
+                <ng-container *ngIf="order?.status != 'canceled'" >
+                    <button class="btn btn-success btn-sm" *ngIf="statusEdited" (click)="toggleStatus(status)">
+                        save
+                    </button>
+                    <button class="btn btn-sm" [ngClass]="{'btn-outline-light' :!statusEdited ,'btn-outline-danger' :statusEdited   }" (click)="editStatus()">
+                        <ng-container *ngIf="!statusEdited">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </ng-container>
+                        <ng-container *ngIf="statusEdited">
+                            <i class="fa-solid fa-xmark"></i>                    
+                        </ng-container>
+                    </button>
+                </ng-container>
+                
+                
             </div>
         </form>
-        <button class="btn btn-danger d-block mb-2" *ngIf="order?.status == 'Waiting for Supplier'">
+        <button class="btn btn-danger d-block mb-2" *ngIf="order?.status != 'canceled'" (click)="cancelOrder()">
             Cancel Order
         </button>
 
