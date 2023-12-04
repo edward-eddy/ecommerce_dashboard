@@ -82,7 +82,7 @@ export class NewproductComponent implements OnInit {
   }
   //==========< Add New Product >===============================================
   AddNewProduct() {
-    if (!this.file[0] || this.files.length <= 4) {
+    if (!this.file[0] || this.files.length < 4) {
       alert('Please upload at least one thumbnail and four images.');
       return;
     }

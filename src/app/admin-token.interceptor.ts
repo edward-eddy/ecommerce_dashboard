@@ -12,8 +12,10 @@ import { AdminAuthService } from './services/admin-auth.service';
 export class adminTokenInterceptor implements HttpInterceptor {
   constructor(private adminAuth: AdminAuthService){}
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    // let cookies = document.cookie.split(/[;=]/);
-    // let token = cookies[cookies.indexOf('token') + 1];
+    console.log(req.url);
+    if ( req.url === "https://api.cloudinary.com/v1_1/doksixv16/image/upload"){
+      return next.handle(req)
+    }
     let token = this.adminAuth.getToken()
     const newRequest = req.clone({
       setHeaders: {
