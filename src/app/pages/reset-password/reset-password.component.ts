@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-enter-email',
-  templateUrl: './enter-email.component.html',
-  styleUrl: './enter-email.component.scss'
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrl: './reset-password.component.scss'
 })
-export class EnterEmailComponent {
+export class ResetPasswordComponent {
   resetPasswordForm: FormGroup;
   displayForm: String = "mail"
   get email() {

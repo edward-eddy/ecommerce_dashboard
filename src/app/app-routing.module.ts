@@ -11,6 +11,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -45,13 +46,7 @@ const routes: Routes = [
     canActivate: [adminLoginGuard],
     title: 'Login',
   },
-  {
-    path: 'resetPassword',
-    loadChildren: () =>
-      import('./components/forget-password/forget-password.module').then(
-        (m) => m.ForgetPasswordModule
-      ),
-  },
+  {path: "resetPassword", component: ResetPasswordComponent, title: "Password Reset"},
   { path: '**', component: NotFoundComponent, title: '404 Page Not Found' },
 ];
 

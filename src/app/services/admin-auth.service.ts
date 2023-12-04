@@ -57,7 +57,7 @@ export class AdminAuthService {
     // case remember me
     document.cookie = `token=null;expires=${date}`;
     // normal case
-    sessionStorage.getItem("token")
+    sessionStorage.removeItem("token")
     this.router.navigateByUrl('/login')
   }
   get isUserLogged(): boolean {
@@ -67,6 +67,8 @@ export class AdminAuthService {
 
   getToken(){
     const sessionToken = sessionStorage.getItem("token")
+    console.log(sessionToken);
+    
     let cookies = document.cookie.split(/[;=]/)
     let cookiesToken = (cookies.indexOf("token") !== -1)
     ?  cookies[cookies.indexOf("token")+1]

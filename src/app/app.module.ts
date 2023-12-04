@@ -28,6 +28,7 @@ import {
   withFetch,
 } from '@angular/common/http';
 import { adminTokenInterceptor } from './admin-token.interceptor';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { adminTokenInterceptor } from './admin-token.interceptor';
     SideNavComponent,
     MobileSideNavComponent,
     GroupOfRoutesComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
