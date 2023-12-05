@@ -36,13 +36,25 @@ export class UserRequestsService {
         this.httpheader
       )
       .pipe(
-        retry(3),
-        catchError((err) => {
-          return throwError(() => {
-            return new Error('Error While Adding user');
-          });
-        })
-      );
+        retry(3))
+      //   catchError((err) => {
+      //     console.log(err.error.message, err.error.message ===
+      //       'This email is used for a user account. Choose another email.');
+          
+      //     if (
+      //       err.error.message ===
+      //         'This email is already assigned as Admin. You can use it to login to the dashboard.' ||
+      //       err.error.message ===
+      //         'This email is used for a user account. Choose another email.'
+      //     ) {
+      //       alert(err.error.message);
+      //       return
+      //     }
+      //     return throwError(() => {
+      //       return new Error('Error While Adding user');
+      //     });
+      //   })
+      // );
     // this.userLoggedBehavior.next(true);
   }
 
@@ -60,19 +72,19 @@ export class UserRequestsService {
             return new Error('Error While Adding user');
           });
         })
-      )
-    }
+      );
+  }
 
-    getOneUser(id : string):Observable<IUser>{
-      return this.httpClient.get<IUser>(`${environment.BAseApiURL}/users/${id}`);
-    }
+  getOneUser(id: string): Observable<IUser> {
+    return this.httpClient.get<IUser>(`${environment.BAseApiURL}/users/${id}`);
+  }
 
-    editOneUser(id : string , updates ):Observable<IUser>{
-      console.log(updates);
-      
-      return this.httpClient.put<IUser>(`${environment.BAseApiURL}/users/${id}` , updates);
+  editOneUser(id: string, updates): Observable<IUser> {
+    console.log(updates);
 
-    }
-
-
+    return this.httpClient.put<IUser>(
+      `${environment.BAseApiURL}/users/${id}`,
+      updates
+    );
+  }
 }

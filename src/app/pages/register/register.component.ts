@@ -51,7 +51,8 @@ export class RegisterComponent {
         this.router.navigate(["/register"])
       },
       error(err) {
-        // console.log(err);
+        alert(err.error.message)
+        // console.log(err.error.message);
       },
     })
   }

@@ -63,7 +63,7 @@
           </div>
           <div class="col-6">
             <input
-              class="form-check-input"
+              class="form-check-input border border-2"
               type="checkbox"
               (change)="logCheck($event)"
               id="rememberMe"
@@ -73,9 +73,11 @@
             </label>
           </div>
           <div class="col-6 text-end">
-            <a href="" style="color: #605cff; text-decoration: none">
-              Reset Password?
-            </a>
+            <small>
+              <a routerLink="/resetPassword" style="color: #605cff; text-decoration: none">
+                Forgot Your Password
+              </a>
+            </small>
           </div>
           <div class="col-12 my-4">
             <input type="submit" value="Log in" class="loginInput" />

@@ -40,17 +40,14 @@ export class AdminAuthService {
         })
       );
   }
-
   setSession(authResult) {
     sessionStorage.setItem('token', authResult.token);
   }
-
   setCookie(authResult) {
     const expiryDate = new Date();
     expiryDate.setSeconds(expiryDate.getSeconds() + authResult.expires_at);
     document.cookie = `token=${authResult.token};expires=${expiryDate}`;
   }
-
   logout() {
     let date = new Date();
     date.setDate(date.getDate() - 1);
@@ -64,7 +61,6 @@ export class AdminAuthService {
     let token = this.getToken();
     return token ? true : false;
   }
-
   getToken() {
     const sessionToken = sessionStorage.getItem('token');
     let cookies = document.cookie.split(/[;=]/);
@@ -73,5 +69,32 @@ export class AdminAuthService {
         ? cookies[cookies.indexOf('token') + 1]
         : null;
     return sessionToken ? sessionToken : cookiesToken;
+  }
+  sendCode(email) {
+    return this.httpClient.post(
+      `${environment.BAseApiURL}/emailRecovery`,
+      { email }
+    )
+    .pipe(
+      retry(3)
+    )
+  }
+  verifyCode(enteredCode) {
+    return this.httpClient.post(
+      `${environment.BAseApiURL}/resetCode`,
+      { enteredCode }
+    )
+    .pipe(
+      retry(3)
+    )
+  }
+  resetPassword(userPassword, enteredCode) {
+    return this.httpClient.patch(
+      `${environment.BAseApiURL}/resetPassword`,
+      { userPassword, enteredCode }
+    )
+    .pipe(
+      retry(3)
+    )
   }
 }
