@@ -12,19 +12,19 @@ import { IPrdsQun } from '../../models/iPrdQun';
 export class OrderDetailsComponent {
   date : Date 
   postDate : string = ""
-  order : IOrders
+  order 
   statusEdited : boolean = false
   status : string 
   itemsIds : IPrdsQun[]
   constructor(private route: ActivatedRoute ,private orderService : OrderRequestsService , private router : Router){}
   ngOnInit() {
 
+
     const routeParams = this.route.snapshot.paramMap;
     const orderIdFromParams = routeParams.get('id');
     this.orderService.getOneOrderById(orderIdFromParams).subscribe({
-      next:(data) =>{
-        this.order = data   
-        console.log(this.order);
+      next:(data:any) =>{
+        this.order = data.order[0]
         this.status = this.order.status
         this.date = new Date(this.order.createdAt)
         this.postDate = this.date.toLocaleDateString('en-US' , { year: 'numeric', month: 'long', day: 'numeric' })
@@ -48,18 +48,15 @@ export class OrderDetailsComponent {
     
     
   }
-  toggleStatus(status: string) {
-    console.log(status);
-    
+  toggleStatus(status: string) {    
     this.orderService.toggleStatus(this.order._id, status , this.order.paymentStatus).subscribe({
       next:(data)=>{
         console.log(data);
         this.statusEdited = !this.statusEdited
         this.ngOnInit()
       },
-      error(err) {
+      error: (err) =>{
         console.log(err);
-        
       }
     })
     

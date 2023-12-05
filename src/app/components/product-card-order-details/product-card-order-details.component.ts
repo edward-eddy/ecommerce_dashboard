@@ -9,7 +9,7 @@ export class ProductCardOrderDetailsComponent {
   @Input() prd ;
 
   ngOnInit(){
-    console.log(this.prd);
+    // console.log(this.prd);
     
   }
 }
