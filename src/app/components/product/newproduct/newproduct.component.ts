@@ -7,6 +7,7 @@ import { Subcategory } from '../../../models/subcategory';
 import { CategoryService } from '../../../services/category.service';
 import { SubcategoryService } from '../../../services/subcategory.service';
 import { ProductRequestsService } from '../../../services/product-requests.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-newproduct',
@@ -26,7 +27,8 @@ export class NewproductComponent implements OnInit {
     public router: Router,
     public categoryService: CategoryService,
     public subCategoryService: SubcategoryService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    public tost: NgToastService
   ) {
     this.categoryService.getAllCategories().subscribe({
       next: (data) => {
@@ -83,7 +85,11 @@ export class NewproductComponent implements OnInit {
   //==========< Add New Product >===============================================
   AddNewProduct() {
     if (!this.file[0] || this.files.length < 4) {
-      alert('Please upload at least one thumbnail and four images.');
+      this.tost.info({
+        detail: 'info Message',
+        summary: 'upload one cover image and four images first',
+        duration: 5000,
+      });
       return;
     }
 
@@ -120,11 +126,21 @@ export class NewproductComponent implements OnInit {
     } else {
       this.productsService.insertNewProduct(this.product).subscribe({
         next: (data) => {
-          console.log(data);
+          // console.log(data);
+          this.tost.success({
+            detail: 'success Message',
+            summary: 'product created successfuly',
+            duration: 5000,
+          });
           this.router.navigate(['/product/product']);
         },
         error: (err) => {
           console.log(err);
+          this.tost.error({
+            detail: 'Error Message',
+            summary: 'creat faild creat again',
+            duration: 5000,
+          });
         },
       });
     }

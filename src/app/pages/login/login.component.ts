@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUser } from '../../models/iuser';
-import { UserRequestsService } from '../../services/user-requests.service';
 import { AdminAuthService } from '../../services/admin-auth.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,8 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private adminAuth: AdminAuthService
+    private adminAuth: AdminAuthService,
+    public tost: NgToastService
   ) {
     this.userLoginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -51,6 +52,13 @@ export class LoginComponent {
 
           this.router.navigateByUrl('/');
         },
+        error: (err)=>{
+          this.tost.error({
+            detail: 'Error',
+            summary: err.error.message,
+            duration: 5000,
+          })
+        }
       });
     }
   }

@@ -33,6 +33,7 @@ import { OrderCardComponent } from './components/order-card/order-card.component
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { ProductCardOrderDetailsComponent } from './components/product-card-order-details/product-card-order-details.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     FormsModule,
     HttpClientModule,
     NgxDropzoneModule,
+    NgToastModule,
   ],
   providers: [
     provideClientHydration(),

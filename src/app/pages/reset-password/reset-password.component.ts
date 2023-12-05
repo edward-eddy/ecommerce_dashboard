@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminAuthService } from '../../services/admin-auth.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-reset-password',
@@ -24,7 +25,7 @@ export class ResetPasswordComponent {
     return this.resetPasswordForm.get('conPassword');
   }
   constructor(private formBuilder: FormBuilder,
-    private router: Router, private adminAuth: AdminAuthService){
+    private router: Router, private adminAuth: AdminAuthService, public tost: NgToastService){
     this.resetPasswordForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       code: ['', [Validators.required, Validators.pattern(/[0-9]/)]],
@@ -59,12 +60,20 @@ export class ResetPasswordComponent {
     
     this.adminAuth.resetPassword({ password:this.password.value , confirmPassword: this.conPassword.value }, this.code.value).subscribe({
       next: (data)=>{
-        alert("Password has been changed")
+          this.tost.success({
+            detail: 'Succeeded',
+            summary: "Password has been changed",
+            duration: 5000,
+          });
         this.displayForm = "mail"
         this.router.navigateByUrl("/")
       },
       error: (err)=>{
-        console.log(err);
+        this.tost.error({
+          detail: 'Error',
+          summary: err.error.message,
+          duration: 5000,
+        });
       }
     })
   }

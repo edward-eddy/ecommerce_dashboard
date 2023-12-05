@@ -32,12 +32,12 @@ export class AdminAuthService {
       )
       .pipe(
         retry(3),
-        catchError((err) => {
-          return throwError(() => {
-            this.userLoggedBehavior.next(true);
-            return new Error('Error While Adding user');
-          });
-        })
+        // catchError((err) => {
+        //   return throwError(() => {
+        //     this.userLoggedBehavior.next(true);
+        //     return new Error('Error While Adding user');
+        //   });
+        // })
       );
   }
   setSession(authResult) {

@@ -5,6 +5,7 @@ import { Category } from '../../../models/category';
 import { Subcategory } from '../../../models/subcategory';
 import { SubcategoryService } from '../../../services/subcategory.service';
 import { CategoryService } from '../../../services/category.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-editsubcategory',
@@ -24,7 +25,8 @@ export class EditsubcategoryComponent implements OnInit {
     public subcategoryService: SubcategoryService,
     public router: Router,
     public activetedRout: ActivatedRoute,
-    public categoryService: CategoryService
+    public categoryService: CategoryService,
+    public tost: NgToastService
   ) {
     this.categoryService.getAllCategories().subscribe({
       next: (data) => {
@@ -96,10 +98,20 @@ export class EditsubcategoryComponent implements OnInit {
             .subscribe({
               next: (data) => {
                 // console.log(data);
+                this.tost.success({
+                  detail: 'success Message',
+                  summary: 'subcategory updated successfuly',
+                  duration: 5000,
+                });
                 this.router.navigate([`/subcategory/subcategory`]);
               },
               error: (err) => {
                 console.log(err);
+                this.tost.error({
+                  detail: 'Error Message',
+                  summary: 'update faild update again',
+                  duration: 5000,
+                });
               },
             });
         }
@@ -110,10 +122,20 @@ export class EditsubcategoryComponent implements OnInit {
       .subscribe({
         next: (data) => {
           // console.log(data);
+          this.tost.success({
+            detail: 'success Message',
+            summary: 'subcategory updated successfuly',
+            duration: 5000,
+          });
           this.router.navigate([`/subcategory/subcategory`]);
         },
         error: (err) => {
           console.log(err);
+          this.tost.error({
+            detail: 'Error Message',
+            summary: 'update faild update again',
+            duration: 5000,
+          });
         },
       });
   }
