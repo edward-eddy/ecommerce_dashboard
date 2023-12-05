@@ -26,14 +26,6 @@ export class DashboardComponent implements OnInit {
     this.productService.getProductCountPerYear().subscribe({
       next: (data) => {
         this.productCounter = data.productCount
-        // "Bug" => the interval makes the application too slow with only +1000 products
-        // let productCounterInterval: any = setInterval(() => {
-        //   if (this.productCounter == data.productCount) {
-        //     clearInterval(productCounterInterval);
-        //     return
-        //   }
-        //   this.productCounter++;
-        // }, 1);
       },
     });
     this.productService.getTopProducts().subscribe({
@@ -43,18 +35,12 @@ export class DashboardComponent implements OnInit {
     })
 
     // get all orders and show the count with interval
-    // this.orderService.getAllOrders().subscribe({
-    //   next: (data) => {
-    //     this.orderList = data.allOrders;
-    //     let orderCounterInterval: any = setInterval(() => {
-    //       if (this.orderCounter == this.orderList.length) {
-    //         clearInterval(orderCounterInterval);
-    //         return
-    //       }
-    //       this.orderCounter++;
-    //     }, 30);
-    //   },
-    // });
+    this.orderService.getAllOrders().subscribe({
+      next: (data) => {
+        this.orderList = data.allOrders;
+        this.orderCounter = this.orderList.length
+      },
+    });
 
     // get all users and show the count with interval
     this.userService.getAllUsers().subscribe({

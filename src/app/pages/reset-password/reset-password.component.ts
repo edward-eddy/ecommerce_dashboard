@@ -69,11 +69,12 @@ export class ResetPasswordComponent {
         this.router.navigateByUrl("/")
       },
       error: (err)=>{
+        if(err.error.message !== "Password and confirm password are required"){
         this.tost.error({
           detail: 'Error',
           summary: err.error.message,
           duration: 5000,
-        });
+        });}
       }
     })
   }

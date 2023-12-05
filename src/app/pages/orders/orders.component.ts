@@ -19,7 +19,7 @@ export class OrdersComponent {
       next :(data) =>{
         console.log(data.allOrders);
         
-        this.allOrders = data.allOrders
+        this.allOrders = data.allOrders.reverse()
 
       },
       error(err) {
